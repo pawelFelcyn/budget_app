@@ -1,7 +1,10 @@
+import 'package:budget_app/presentation/login_controller.dart';
 import 'package:flutter/material.dart';
 
 class LoginPage extends StatelessWidget{
-  const LoginPage({super.key});
+  final LoginController _controller = LoginController();
+
+  LoginPage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -66,7 +69,7 @@ class LoginPage extends StatelessWidget{
                   children: [
                     Expanded(
                       child: TextButton(
-                      onPressed: (){},
+                      onPressed: _controller.goToRegistration,
                       style: ButtonStyle(
                         backgroundColor: MaterialStateProperty.all<Color>(Colors.white),
                         overlayColor: MaterialStateProperty.all<Color>(Colors.lightGreen),
