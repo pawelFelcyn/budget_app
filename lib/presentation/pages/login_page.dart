@@ -1,4 +1,4 @@
-import 'package:budget_app/presentation/login_controller.dart';
+import 'package:budget_app/presentation/controllers/login_controller.dart';
 import 'package:flutter/material.dart';
 
 class LoginPage extends StatelessWidget{
