@@ -1,7 +1,11 @@
+import 'package:budget_app/presentation/controllers/register_controller.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get_state_manager/get_state_manager.dart';
 
 class RegisterPage extends StatelessWidget{
-  const RegisterPage({super.key});
+  final RegisterController _controller = RegisterController();
+
+  RegisterPage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -24,21 +28,24 @@ class RegisterPage extends StatelessWidget{
               fontSize: 15
             ),),
             const SizedBox(height: 20,),
-            const TextField(
-                  decoration: InputDecoration(
-                    hintText: 'Name',
-                    border: OutlineInputBorder(),
-                    focusedBorder: OutlineInputBorder(
-                      borderSide: BorderSide(
-                        color: Colors.green,
-                        width: 1.5
-                      )
-                    )
-                  ),
-                ),
-            const SizedBox(height: 10,),
-            const TextField(
-                  decoration: InputDecoration(
+            // const TextField(
+            //       decoration: InputDecoration(
+            //         hintText: 'Name',
+            //         border: OutlineInputBorder(),
+            //         focusedBorder: OutlineInputBorder(
+            //           borderSide: BorderSide(
+            //             color: Colors.green,
+            //             width: 1.5
+            //           )
+            //         )
+            //       ),
+            //     ),
+            // const SizedBox(height: 10,),
+            TextField(
+              onChanged: ((value) {
+                    _controller.dto.value.password = value;
+              }),
+                  decoration: const InputDecoration(
                     hintText: 'Email',
                     border: OutlineInputBorder(),
                     focusedBorder: OutlineInputBorder(
@@ -50,9 +57,12 @@ class RegisterPage extends StatelessWidget{
                   ),
                 ),
             const SizedBox(height: 10,),
-            const TextField(
+            TextField(
+                  onChanged: (value){
+                    _controller.dto.value.password = value;
+                  },
                   obscureText: true,
-                  decoration: InputDecoration(
+                  decoration: const InputDecoration(
                     hintText: 'Password',
                     border: OutlineInputBorder(),
                     focusedBorder: OutlineInputBorder(
@@ -64,25 +74,25 @@ class RegisterPage extends StatelessWidget{
                   ),
                 ),
             const SizedBox(height: 10,),
-            const TextField(
-                  obscureText: true,
-                  decoration: InputDecoration(
-                    hintText: 'Confirm password',
-                    border: OutlineInputBorder(),
-                    focusedBorder: OutlineInputBorder(
-                      borderSide: BorderSide(
-                        color: Colors.green,
-                        width: 1.5
-                      )
-                    )
-                  ),
-                ),
-            const SizedBox(height: 10,),
+            // const TextField(
+            //       obscureText: true,
+            //       decoration: InputDecoration(
+            //         hintText: 'Confirm password',
+            //         border: OutlineInputBorder(),
+            //         focusedBorder: OutlineInputBorder(
+            //           borderSide: BorderSide(
+            //             color: Colors.green,
+            //             width: 1.5
+            //           )
+            //         )
+            //       ),
+            //     ),
+            // const SizedBox(height: 10,),
             Row(
                   children: [
                     Expanded(
                       child: TextButton(
-                      onPressed: (){},
+                      onPressed: _controller.register,
                       style: ButtonStyle(
                         backgroundColor: MaterialStateProperty.all<Color>(Colors.green),
                         overlayColor: MaterialStateProperty.all<Color>(Colors.lightGreen),
