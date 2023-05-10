@@ -43,7 +43,7 @@ class RegisterPage extends StatelessWidget{
             // const SizedBox(height: 10,),
             TextField(
               onChanged: ((value) {
-                    _controller.dto.value.password = value;
+                    _controller.dto.value.email = value;
               }),
                   decoration: const InputDecoration(
                     hintText: 'Email',
