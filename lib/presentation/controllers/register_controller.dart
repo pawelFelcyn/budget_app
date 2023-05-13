@@ -1,4 +1,5 @@
 import 'package:budget_app/data/dtos/register_dto.dart';
+import 'package:budget_app/data/responses/register_response.dart';
 import 'package:budget_app/domain/services/registration_service.dart';
 import 'package:budget_app/domain/validators/register_dto_validator.dart';
 import 'package:budget_app/presentation/views/error_popup.dart';
@@ -27,14 +28,17 @@ class RegisterController extends GetxController{
       return;
     }
 
-    if (result.isEmailTaken){
-      Get.defaultDialog(title: 'Error', content: const Text('That email is taken'));
+    if (result.errorOccured){
+      Get.defaultDialog(title: 'Error', content: _getErrorPopupWidget(result));
       return;
+    }
+  }
+
+  Widget _getErrorPopupWidget(RegisterResponse response){
+    if (response.errorMessage != null){
+      return Text(response.errorMessage as String);
     }
 
-    if (result.errorOccured){
-      Get.defaultDialog(title: 'Error', content: ErrorPopup(result.error.toString()));
-      return;
-    }
+    return ErrorPopup(response.error.toString());
   }
 }

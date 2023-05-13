@@ -10,7 +10,9 @@ class RegisterDtoValidator{
     }
 
     if (dto.password == ''){
-      output = '$output Password must not be empty';
+      output = '$output Password must not be empty.';
+    } else if (dto.password.length < 6){
+      output = '$output Password must have at least 6 characters.';
     }
 
     return output == '' ? ValidationResult.success() : ValidationResult.failure(output);

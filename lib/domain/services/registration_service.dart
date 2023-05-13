@@ -12,7 +12,11 @@ class RegistrationService{
     return RegisterResponse.succes();
   } on FirebaseAuthException catch (e) {
     if (e.code == 'email-already-in-use'){
-      return RegisterResponse.emailTaken();
+      return RegisterResponse.withErrorMessage('That email is taken');
+    }
+    
+    if (e.code == 'weak-password'){
+      return RegisterResponse.withErrorMessage('Password must have at least 6 characters');
     }
 
     return RegisterResponse.withError(e);
