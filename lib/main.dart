@@ -2,6 +2,7 @@ import 'package:budget_app/firebase_options.dart';
 import 'package:budget_app/presentation/pages/home_page.dart';
 import 'package:budget_app/presentation/pages/login_page.dart';
 import 'package:budget_app/presentation/pages/register_page.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
@@ -18,6 +19,10 @@ void main() async{
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
+  String _getInitialRoute(){
+    return FirebaseAuth.instance.currentUser == null ? '/login' : '/home';
+  }
+
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
@@ -26,7 +31,7 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
       ),
       debugShowCheckedModeBanner: false,
-      initialRoute: '/login',
+      initialRoute: _getInitialRoute(),
       getPages: [
         GetPage(name: '/home', page: () => HomePage()),
         GetPage(name: '/login', page: () => LoginPage()),
