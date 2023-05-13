@@ -1,22 +1,18 @@
 import 'package:budget_app/data/dtos/register_dto.dart';
-import 'package:budget_app/data/responses/register_response.dart';
 import 'package:budget_app/domain/services/registration_service.dart';
 import 'package:budget_app/domain/validators/register_dto_validator.dart';
-import 'package:budget_app/presentation/views/error_popup.dart';
+import 'package:budget_app/presentation/controllers/controller_base.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class RegisterController extends GetxController{
+class RegisterController extends ControllerBase{
   final RegistrationService  _service = RegistrationService();
   final RegisterDtoValidator _validator = RegisterDtoValidator();
 
   Rx<RegisterDto> dto = RegisterDto().obs;
 
   void register() async{
-    var validationResult = _validator.validate(dto.value);
-
-    if (!validationResult.isSuccess){
-      Get.defaultDialog(title: 'Error', content: Text(validationResult.errors ?? ''));
+    if (!validate(dto.value, _validator)){
       return;
     }
 
@@ -28,17 +24,6 @@ class RegisterController extends GetxController{
       return;
     }
 
-    if (result.errorOccured){
-      Get.defaultDialog(title: 'Error', content: _getErrorPopupWidget(result));
-      return;
-    }
-  }
-
-  Widget _getErrorPopupWidget(RegisterResponse response){
-    if (response.errorMessage != null){
-      return Text(response.errorMessage as String);
-    }
-
-    return ErrorPopup(response.error.toString());
+    handleErrorFirebaseResponse(result);
   }
 }

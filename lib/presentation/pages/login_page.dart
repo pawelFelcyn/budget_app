@@ -17,8 +17,11 @@ class LoginPage extends StatelessWidget{
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                const TextField(
-                  decoration: InputDecoration(
+                TextField(
+                  onChanged: (value){
+                    _controller.dto.value.email = value;
+                  },
+                  decoration: const InputDecoration(
                     hintText: 'Email',
                     border: OutlineInputBorder(),
                     focusedBorder: OutlineInputBorder(
@@ -30,9 +33,12 @@ class LoginPage extends StatelessWidget{
                   ),
                 ),
                 const SizedBox(height: 10,),
-                const TextField(
+                TextField(
+                  onChanged: (value){
+                    _controller.dto.value.password = value;
+                  },
                   obscureText: true,
-                  decoration: InputDecoration(
+                  decoration: const InputDecoration(
                     hintText: 'Password',
                     border: OutlineInputBorder(),
                     focusedBorder: OutlineInputBorder(
@@ -48,7 +54,7 @@ class LoginPage extends StatelessWidget{
                   children: [
                     Expanded(
                       child: TextButton(
-                      onPressed: (){},
+                      onPressed: _controller.login,
                       style: ButtonStyle(
                         backgroundColor: MaterialStateProperty.all<Color>(Colors.green),
                         overlayColor: MaterialStateProperty.all<Color>(Colors.lightGreen),
