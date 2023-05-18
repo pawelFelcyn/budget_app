@@ -17,6 +17,20 @@ class NavBar extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
+            Expanded(
+              child: Align(
+                alignment: Alignment.topCenter,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: [
+                    const SizedBox(height: 100,),
+                    TextButton(
+                      style: Styles.flyoutActionButtonStyle,
+                      onPressed: (){}, 
+                      child: const Text('My expenses'))
+                  ],
+                ),
+              ),),
           Expanded(
             child: Align(
               alignment: Alignment.bottomCenter,

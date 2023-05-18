@@ -22,4 +22,8 @@ class Styles{
       )
     )
   );
+
+  static ButtonStyle flyoutActionButtonStyle = ButtonStyle(
+      backgroundColor: MaterialStateProperty.all<Color>(const Color.fromARGB(255, 240, 240, 240))
+  );
 }
