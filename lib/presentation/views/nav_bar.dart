@@ -26,7 +26,7 @@ class NavBar extends StatelessWidget {
                     const SizedBox(height: 100,),
                     TextButton(
                       style: Styles.flyoutActionButtonStyle,
-                      onPressed: (){}, 
+                      onPressed: _controller.goToMyExpenses, 
                       child: const Text('My expenses'))
                   ],
                 ),

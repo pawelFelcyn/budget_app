@@ -7,4 +7,8 @@ class NavBarController extends ControllerBase{
     FirebaseAuth.instance.signOut();
     Get.toNamed('/login');
   }
+
+  goToMyExpenses(){
+    Get.toNamed('/myexpenses');
+  }
 }
