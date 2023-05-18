@@ -12,7 +12,11 @@ class MyExpensesPage extends StatelessWidget{
       appBar: AppBar(
         title: const Text('My expenses'),
       ),
-      body: const Text('This is home page'));
+      body: const Text('This is home page'),
+      floatingActionButton: FloatingActionButton(
+        onPressed: (){},
+        child: const Icon(Icons.add),),
+    );
   }
 
 }
