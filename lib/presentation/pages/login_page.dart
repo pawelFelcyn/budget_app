@@ -1,6 +1,8 @@
 import 'package:budget_app/presentation/controllers/login_controller.dart';
 import 'package:flutter/material.dart';
 
+import '../utils/styles.dart';
+
 class LoginPage extends StatelessWidget{
   final LoginController _controller = LoginController();
 
@@ -53,18 +55,9 @@ class LoginPage extends StatelessWidget{
                 Row(
                   children: [
                     Expanded(
-                      child: TextButton(
+                      child: TextButton(  
                       onPressed: _controller.login,
-                      style: ButtonStyle(
-                        backgroundColor: MaterialStateProperty.all<Color>(Colors.green),
-                        overlayColor: MaterialStateProperty.all<Color>(Colors.lightGreen),
-                        shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                          RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(15),
-                            side: const BorderSide(color: Colors.green)
-                          )
-                        )
-                      ), 
+                      style: Styles.primaryButtonStyle, 
                       child: const Text('Sign in',
                       style: TextStyle(color: Colors.white),),),
                     )
@@ -76,16 +69,7 @@ class LoginPage extends StatelessWidget{
                     Expanded(
                       child: TextButton(
                       onPressed: _controller.goToRegistration,
-                      style: ButtonStyle(
-                        backgroundColor: MaterialStateProperty.all<Color>(Colors.white),
-                        overlayColor: MaterialStateProperty.all<Color>(Colors.lightGreen),
-                        shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                          RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(15),
-                            side: const BorderSide(color: Colors.green)
-                          )
-                        )
-                      ), 
+                      style: Styles.secondaryButtonStyle, 
                       child: const Text('Sign up',
                       style: TextStyle(color: Colors.green),),),
                     )
