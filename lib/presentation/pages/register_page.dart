@@ -4,10 +4,8 @@ import 'package:get/get_state_manager/get_state_manager.dart';
 
 import '../utils/styles.dart';
 
-class RegisterPage extends StatelessWidget{
-  final RegisterController _controller = RegisterController();
-
-  RegisterPage({super.key});
+class RegisterPage extends GetView<RegisterController>{
+  const RegisterPage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -32,7 +30,7 @@ class RegisterPage extends StatelessWidget{
             const SizedBox(height: 20,),
             TextField(
               onChanged: ((value) {
-                    _controller.dto.value.email = value;
+                    controller.dto.value.email = value;
               }),
                   decoration: const InputDecoration(
                     hintText: 'Email',
@@ -48,7 +46,7 @@ class RegisterPage extends StatelessWidget{
             const SizedBox(height: 10,),
             TextField(
                   onChanged: (value){
-                    _controller.dto.value.password = value;
+                    controller.dto.value.password = value;
                   },
                   obscureText: true,
                   decoration: const InputDecoration(
@@ -67,7 +65,7 @@ class RegisterPage extends StatelessWidget{
                   children: [
                     Expanded(
                       child: TextButton(
-                      onPressed: _controller.register,
+                      onPressed: controller.register,
                       style: Styles.primaryButtonStyle,
                       child: const Text('Sign up',
                       style: TextStyle(color: Colors.white),),),

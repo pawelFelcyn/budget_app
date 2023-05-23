@@ -2,7 +2,8 @@ import 'package:budget_app/data/dtos/register_dto.dart';
 import 'package:budget_app/data/responses/firebase_response.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
-class RegistrationService{
+class RegistrationServiceImpl extends RegistrationService{
+  @override
   Future<FirebaseResponse> register(RegisterDto dto) async {
   try {
     await FirebaseAuth.instance.createUserWithEmailAndPassword(
@@ -24,4 +25,8 @@ class RegistrationService{
     return FirebaseResponse.withError(e);
   }
 }
+}
+
+abstract class RegistrationService{
+  Future<FirebaseResponse> register(RegisterDto dto);
 }
