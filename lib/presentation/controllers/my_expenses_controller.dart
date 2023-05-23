@@ -6,6 +6,16 @@ class MyExpensesController extends ControllerBase{
   final RxList<ExpenseDto> expenses = <ExpenseDto>[
     ExpenseDto(title: 'First expense', cost: 20),
     ExpenseDto(title: 'Second exense', cost: 10.5),
-    ExpenseDto(title: 'Third expense', cost: 5)
+    ExpenseDto(title: 'Third expense', cost: 5),
+    ExpenseDto(title: 'Third expense', cost: 5),
+    ExpenseDto(title: 'Third expense', cost: 5),
+    ExpenseDto(title: 'Third expense', cost: 5),
+    ExpenseDto(title: 'Third expense', cost: 5),
+    ExpenseDto(title: 'Third expense', cost: 5),
+    ExpenseDto(title: 'Third expense', cost: 5),
+    ExpenseDto(title: 'Third expense', cost: 5),
+    ExpenseDto(title: 'Third expense', cost: 5),
+    ExpenseDto(title: 'Third expense', cost: 5),
+
   ].obs;
 }
