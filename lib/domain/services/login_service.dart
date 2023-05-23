@@ -2,7 +2,8 @@ import 'package:budget_app/data/dtos/login_dto.dart';
 import 'package:budget_app/data/responses/firebase_response.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
-class LoginService{
+class LoginServiceImpl extends LoginService{
+  @override
   Future<FirebaseResponse> login(LoginDto dto) async {
     try{
       await FirebaseAuth.instance.signInWithEmailAndPassword(email: dto.email, password: dto.password);
@@ -16,4 +17,8 @@ class LoginService{
       return FirebaseResponse.withError(e);
     }
   }
+}
+
+abstract class LoginService {
+  Future<FirebaseResponse> login(LoginDto dto);
 }

@@ -8,9 +8,11 @@ import 'package:get/get_rx/src/rx_types/rx_types.dart';
 import '../../domain/validators/validator.dart';
 
 class LoginController extends ControllerBase{
-  final Validator<LoginDto> validator = LoginDtoValidator();
-  final LoginService service = LoginService();
+  final Validator<LoginDto> validator;
+  final LoginService service;
   final Rx<LoginDto> dto = LoginDto().obs;
+
+  LoginController(this.service, this.validator);
 
   void goToRegistration(){
     Get.toNamed('/login/register');
