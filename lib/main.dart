@@ -2,6 +2,7 @@ import 'package:budget_app/firebase_options.dart';
 import 'package:budget_app/presentation/bindings/login_binding.dart';
 import 'package:budget_app/presentation/bindings/my_expenses_binding.dart';
 import 'package:budget_app/presentation/bindings/register_binding.dart';
+import 'package:budget_app/presentation/pages/expense_details_page.dart';
 import 'package:budget_app/presentation/pages/home_page.dart';
 import 'package:budget_app/presentation/pages/login_page.dart';
 import 'package:budget_app/presentation/pages/my_expenses_page.dart';
@@ -48,7 +49,10 @@ class MyApp extends StatelessWidget {
         binding: LoginBinding()),
         GetPage(name: '/login/register', 
         page: () => const RegisterPage(),
-        binding: RegisterBinding())
+        binding: RegisterBinding()),
+        GetPage( name: '/myexpenses/details',
+          page: () => ExpenseDetailsPage()
+        )
       ],
     );
   }

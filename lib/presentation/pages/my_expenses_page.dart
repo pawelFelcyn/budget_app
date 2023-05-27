@@ -56,7 +56,9 @@ class MyExpensesPage extends GetView<MyExpensesController>{
                                   style: Styles.primaryButtonStyle,
                                   child: const Text('Details',
                                   style: TextStyle(color: Colors.white),),
-                                  onPressed: (){},),)),
+                                  onPressed: (){
+                                    controller.goToDetailsPage(controller.expenses[index]);
+                                  },),)),
                             const SizedBox(width: 10,)
                           ],
                         ),

@@ -1,21 +1,25 @@
 import 'package:budget_app/data/dtos/expense.dto.dart';
 import 'package:budget_app/presentation/controllers/controller_base.dart';
-import 'package:get/get_rx/src/rx_types/rx_types.dart';
+import 'package:get/get.dart';
 
 class MyExpensesController extends ControllerBase{
   final RxList<ExpenseDto> expenses = <ExpenseDto>[
-    ExpenseDto(title: 'First expense', cost: 20),
-    ExpenseDto(title: 'Second exense', cost: 10.5),
-    ExpenseDto(title: 'Third expense', cost: 5),
-    ExpenseDto(title: 'Third expense', cost: 5),
-    ExpenseDto(title: 'Third expense', cost: 5),
-    ExpenseDto(title: 'Third expense', cost: 5),
-    ExpenseDto(title: 'Third expense', cost: 5),
-    ExpenseDto(title: 'Third expense', cost: 5),
-    ExpenseDto(title: 'Third expense', cost: 5),
-    ExpenseDto(title: 'Third expense', cost: 5),
-    ExpenseDto(title: 'Third expense', cost: 5),
-    ExpenseDto(title: 'Third expense', cost: 5),
+    ExpenseDto.createdNow('First expense', 20, description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim adLorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim adLorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim adLorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim adLorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim adLorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad'),
+    ExpenseDto.createdNow('Second exense', 10.5),
+    ExpenseDto.createdNow('Third expense', 5),
+    ExpenseDto.createdNow('Third expense', 5),
+    ExpenseDto.createdNow('Third expense', 5),
+    ExpenseDto.createdNow('Third expense', 5),
+    ExpenseDto.createdNow('Third expense', 5),
+    ExpenseDto.createdNow('Third expense', 5),
+    ExpenseDto.createdNow('Third expense', 5),
+    ExpenseDto.createdNow('Third expense', 5),
+    ExpenseDto.createdNow('Third expense', 5),
+    ExpenseDto.createdNow('Third expense', 5),
 
   ].obs;
+
+  void goToDetailsPage(ExpenseDto dto){
+    Get.toNamed('/myexpenses/details', arguments: dto);
+  }
 }
