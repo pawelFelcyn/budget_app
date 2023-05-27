@@ -71,7 +71,7 @@ class MyExpensesPage extends GetView<MyExpensesController>{
           ),]
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: (){},
+        onPressed: controller.goToCreateNewView,
         child: const Icon(Icons.add),),
     );
   }

@@ -22,4 +22,8 @@ class MyExpensesController extends ControllerBase{
   void goToDetailsPage(ExpenseDto dto){
     Get.toNamed('/myexpenses/details', arguments: dto);
   }
+
+  void goToCreateNewView(){
+    Get.toNamed('/myexpenses/create');
+  }
 }
