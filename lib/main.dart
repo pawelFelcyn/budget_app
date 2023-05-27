@@ -1,4 +1,5 @@
 import 'package:budget_app/firebase_options.dart';
+import 'package:budget_app/presentation/bindings/create_expense_binding.dart';
 import 'package:budget_app/presentation/bindings/login_binding.dart';
 import 'package:budget_app/presentation/bindings/my_expenses_binding.dart';
 import 'package:budget_app/presentation/bindings/register_binding.dart';
@@ -55,7 +56,8 @@ class MyApp extends StatelessWidget {
           page: () => const ExpenseDetailsPage()
         ),
         GetPage(name: '/myexpenses/create',
-        page: () => CreateExpensePage())
+        page: () => CreateExpensePage(),
+        binding: CreateExpenseBinding())
       ],
     );
   }
