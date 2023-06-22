@@ -5,7 +5,7 @@ import 'package:get/get.dart';
 class MyExpensesBinding extends Bindings{
   @override
   void dependencies() {
-    Get.lazyPut(() => ExpenseService());
+    Get.lazyPut<ExpenseService>(() => ExpenseServiceImpl());
     Get.lazyPut(() => MyExpensesController(
       Get.find<ExpenseService>()
     ));

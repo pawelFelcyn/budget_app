@@ -4,11 +4,12 @@ import 'package:budget_app/data/responses/firebase_response.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
-class ExpenseService{
+class ExpenseServiceImpl extends ExpenseService{
 
   final CollectionReference expensesRef =
       FirebaseFirestore.instance.collection('expenses');
 
+  @override
   Future<FirebaseResponse> createExpense(CreateExpenseDto createExpenseDto) async {
     var expenseDto = ExpenseDto.createdNow(createExpenseDto.title, createExpenseDto.cost, description: createExpenseDto.description);
     try {
@@ -30,6 +31,7 @@ class ExpenseService{
     }
   }
 
+  @override
   Future<List<ExpenseDto>> getAllExpenses() async {
     try {
       User? user = FirebaseAuth.instance.currentUser;
@@ -57,4 +59,9 @@ class ExpenseService{
       throw Exception('Failed to get expenses: $e');
     }
   }
+}
+
+ abstract class ExpenseService{
+  Future<FirebaseResponse> createExpense(CreateExpenseDto createExpenseDto);
+  Future<List<ExpenseDto>> getAllExpenses();
 }
