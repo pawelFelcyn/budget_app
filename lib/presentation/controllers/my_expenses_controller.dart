@@ -1,23 +1,13 @@
 import 'package:budget_app/data/dtos/expense.dto.dart';
+import 'package:budget_app/domain/services/expense_service.dart';
 import 'package:budget_app/presentation/controllers/controller_base.dart';
 import 'package:get/get.dart';
 
 class MyExpensesController extends ControllerBase{
-  final RxList<ExpenseDto> expenses = <ExpenseDto>[
-    ExpenseDto.createdNow('First expense', 20, description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim adLorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim adLorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim adLorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim adLorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim adLorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad'),
-    ExpenseDto.createdNow('Second exense', 10.5),
-    ExpenseDto.createdNow('Third expense', 5),
-    ExpenseDto.createdNow('Third expense', 5),
-    ExpenseDto.createdNow('Third expense', 5),
-    ExpenseDto.createdNow('Third expense', 5),
-    ExpenseDto.createdNow('Third expense', 5),
-    ExpenseDto.createdNow('Third expense', 5),
-    ExpenseDto.createdNow('Third expense', 5),
-    ExpenseDto.createdNow('Third expense', 5),
-    ExpenseDto.createdNow('Third expense', 5),
-    ExpenseDto.createdNow('Third expense', 5),
+  final RxList<ExpenseDto> expenses = <ExpenseDto>[].obs;
+  final ExpenseService _service;
 
-  ].obs;
+  MyExpensesController(this._service);
 
   void goToDetailsPage(ExpenseDto dto){
     Get.toNamed('/myexpenses/details', arguments: dto);
@@ -25,5 +15,13 @@ class MyExpensesController extends ControllerBase{
 
   void goToCreateNewView(){
     Get.toNamed('/myexpenses/create');
+  }
+
+  void loadExpenses() async{
+    expenses.clear();
+    var expensesFromFirebase = await _service.getAllExpenses();
+    for (int i = 0; i < expensesFromFirebase.length; i++){
+      expenses.add(expensesFromFirebase[i]);
+    }
   }
 }
