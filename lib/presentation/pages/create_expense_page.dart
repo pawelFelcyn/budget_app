@@ -94,7 +94,7 @@ class CreateExpensePage extends GetView<CreateExpenseController>{
                   width: 300,
                   child: Expanded(
                     child: TextButton(
-                    onPressed: (){}, 
+                    onPressed: controller.submit, 
                     style: Styles.primaryButtonStyle,
                     child: const Text('Submit', style: TextStyle(color: Colors.white))
                     ),
