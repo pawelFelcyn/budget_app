@@ -1,7 +1,9 @@
 import 'package:budget_app/data/responses/firebase_response.dart';
+import 'package:budget_app/domain/validators/validation_result.dart';
 import '../../domain/validators/validator.dart';
 import 'package:get/get.dart';
 import 'package:flutter/material.dart';
+import '../utils/styles.dart';
 import '../views/error_popup.dart';
 
 abstract class ControllerBase extends GetxController{
@@ -34,5 +36,18 @@ abstract class ControllerBase extends GetxController{
     }
 
     return ErrorPopup(response.error.toString());
+  }
+
+  Widget getErrorWidget(ValidationResult result, String propertyName){
+    var error = result.getErrorForProperty(propertyName);
+
+    if (error == null){
+      return Container();
+    }
+
+    return Align(
+      alignment: Alignment.centerLeft,
+      child: Text(error.message, style: Styles.errorStyle,)
+    );
   }
 }

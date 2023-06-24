@@ -19,16 +19,16 @@ class CreateExpenseDtoValidator extends Validator<CreateExpenseDto> {
 
     if (title.isEmpty) {
       output = "${output}Title must not be empty. ";
-    } else if (output.length > 50) {
-      output = "${output}Max length of the title is 50 characters. ";
+    } else if (output.length > 15) {
+      output = "${output}Max length of the title is 15 characters. ";
     }
 
     return output == '' ? null : output;
   }
   
   String? _validateDesription(String description){
-    if (description.length > 200) {
-      return "Max length of the description is 200 charactrers. ";
+    if (description.length > 50) {
+      return "Max length of the description is 50 charactrers. ";
     }
     return null;
   }

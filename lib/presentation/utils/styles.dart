@@ -31,4 +31,8 @@ class Styles{
     fontSize: 25,
     color: Colors.green
   );
+
+  static TextStyle errorStyle = const TextStyle(
+    color: Colors.red
+  );
 }

@@ -2,6 +2,7 @@ import 'package:budget_app/presentation/controllers/create_expense_controller.da
 import 'package:budget_app/presentation/utils/styles.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:get/get_state_manager/src/rx_flutter/rx_getx_widget.dart';
 import 'package:get/get_state_manager/src/simple/get_view.dart';
 
 class CreateExpensePage extends GetView<CreateExpenseController>{
@@ -26,68 +27,91 @@ class CreateExpensePage extends GetView<CreateExpenseController>{
                 const SizedBox(height: 10,),
                 SizedBox(
                   width: 300,
-                  child: TextField(
-                      onChanged: (value){
-                        controller.dto.value.title = value;
-                      },
-                      decoration: const InputDecoration(
-                        hintText: 'Title',
-                        border: OutlineInputBorder(),
-                        focusedBorder: OutlineInputBorder(
-                          borderSide: BorderSide(
-                            color: Colors.green,
-                            width: 1.5
-                          )
-                        )
-                      ),
-                    ),
-                ),
-                const SizedBox(height: 10,),
-                SizedBox(
-                  width: 300,
-                  child: TextField(
-                      onChanged: (value){
-                        if (value == ''){
-                          controller.dto.value.cost = 0;
-                          return;
-                        }
-                        controller.dto.value.cost = double.parse(value);
-                      },
-                      inputFormatters: [
-                        FilteringTextInputFormatter.allow(controller.costRegex)
+                  child: GetX<CreateExpenseController>(
+                    builder: (ctrl) => 
+                    Column(
+                      children: [
+                        TextField(
+                          onChanged: (value){
+                            controller.dto.value.title = value;
+                          },
+                          decoration: const InputDecoration(
+                            hintText: 'Title',
+                            border: OutlineInputBorder(),
+                            focusedBorder: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                color: Colors.green,
+                                width: 1.5
+                              )
+                            )
+                          ),
+                        ),
+                        ctrl.getErrorWidget(ctrl.validationResult.value, 'title')
                       ],
-                      decoration: const InputDecoration(
-                        hintText: 'Cost',
-                        border: OutlineInputBorder(),
-                        focusedBorder: OutlineInputBorder(
-                          borderSide: BorderSide(
-                            color: Colors.green,
-                            width: 1.5
-                          )
-                        )
-                      ),
-                    ),
+                    ),),
                 ),
                 const SizedBox(height: 10,),
                 SizedBox(
                   width: 300,
-                  child: TextField(
-                    minLines: 7,
-                    maxLines: 7,
-                      onChanged: (value){
-                        controller.dto.value.description = value;
-                      },
-                      decoration: const InputDecoration(
-                        hintText: 'Description',
-                        border: OutlineInputBorder(),
-                        focusedBorder: OutlineInputBorder(
-                          borderSide: BorderSide(
-                            color: Colors.green,
-                            width: 1.5
-                          )
-                        )
-                      ),
-                    ),
+                  child: GetX<CreateExpenseController>(
+                    builder: 
+                    (ctrl) => 
+                    Column(
+                      children: [
+                        TextField(
+                          onChanged: (value){
+                            if (value == ''){
+                              controller.dto.value.cost = 0;
+                              return;
+                            }
+                            controller.dto.value.cost = double.parse(value);
+                          },
+                          inputFormatters: [
+                            FilteringTextInputFormatter.allow(controller.costRegex)
+                          ],
+                          decoration: const InputDecoration(
+                            hintText: 'Cost',
+                            border: OutlineInputBorder(),
+                            focusedBorder: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                color: Colors.green,
+                                width: 1.5
+                              )
+                            )
+                          ),
+                        ),
+                        ctrl.getErrorWidget(ctrl.validationResult.value, 'cost')
+                      ],
+                    ),),
+                ),
+                const SizedBox(height: 10,),
+                SizedBox(
+                  width: 300,
+                  child: GetX<CreateExpenseController>(
+                    builder: 
+                    (ctrl) => 
+                    Column(
+                      children: [
+                        TextField(
+                        minLines: 4,
+                        maxLines: 4,
+                          onChanged: (value){
+                            controller.dto.value.description = value;
+                          },
+                          decoration: const InputDecoration(
+                            hintText: 'Description',
+                            border: OutlineInputBorder(),
+                            focusedBorder: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                color: Colors.green,
+                                width: 1.5
+                              )
+                            )
+                          ),
+                        ),
+                        ctrl.getErrorWidget(ctrl.validationResult.value, 'description')
+                      ],
+                    ),),
                 ),
                 const SizedBox(height: 10,),
                 SizedBox(
