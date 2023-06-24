@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
+import 'package:intl/intl.dart';
 
 class DateFilterSelectionDropdown extends StatefulWidget{
 
@@ -37,7 +39,7 @@ class _DateFilterSelectionDropdownState extends State<DateFilterSelectionDropdow
           .map<DropdownMenuItem<String>>((String value) {
            return DropdownMenuItem<String>(
              value: value,
-             child: _getDateFilterDropdownItem(value),
+             child: _getDateFilterDropdownItem(value, context),
            );
          }).toList(),
          onChanged: (v) {
@@ -50,7 +52,7 @@ class _DateFilterSelectionDropdownState extends State<DateFilterSelectionDropdow
          });
   }
 
-  Widget _getDateFilterDropdownItem(String selection) {
+  Widget _getDateFilterDropdownItem(String selection, BuildContext context) {
     if (selection != "Custom"){
       return Text(selection);
     }
@@ -58,9 +60,33 @@ class _DateFilterSelectionDropdownState extends State<DateFilterSelectionDropdow
     return Row(children: [
       Text(selection),
       const SizedBox(width: 10,),
-      const Text('From: '),
+      TextButton(
+        onPressed: () {
+          DatePicker.showDatePicker(context,
+          maxTime: DateTime.now(),
+          onConfirm: (time) {
+            setState(() {
+              _customStartDate = DateTime(time.year, time.month, time.day, 0, 0);
+              _calculateDateRange();
+            });
+          },);
+        },
+        child: Text('From: ${DateFormat('dd.MM.yy').format(_customStartDate)}')
+        ),
       const SizedBox(width: 10,),
-      const Text("To: "),
+      TextButton(
+        onPressed: () {
+          DatePicker.showDatePicker(context,
+          maxTime: DateTime.now(),
+          onConfirm: (time) {
+            setState(() {
+              _customEndDate = DateTime(time.year, time.month, time.day, 23, 59);
+              _calculateDateRange();
+            });
+          },);
+        },
+        child: Text('To: ${DateFormat('dd.MM.yy').format(_customStartDate)}')
+        ),
       const SizedBox(width: 10,)
     ],); 
   }
