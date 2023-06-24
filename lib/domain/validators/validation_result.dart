@@ -1,10 +1,8 @@
+import 'package:budget_app/domain/validators/validation_error.dart';
+
 class ValidationResult{
-  bool isSuccess;
-  String? errors;
+  bool get isSuccess => errors.isEmpty;
+  List<ValidationError> errors;
 
-  ValidationResult(this.isSuccess, this.errors);
-
-  static ValidationResult success() => ValidationResult(true, null);
-
-  static ValidationResult failure(String errors) => ValidationResult(false, errors);
+  ValidationResult(this.errors);
 }

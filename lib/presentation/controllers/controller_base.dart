@@ -9,7 +9,13 @@ abstract class ControllerBase extends GetxController{
     var validationResult = validator.validate(model);
 
     if (!validationResult.isSuccess){
-      Get.defaultDialog(title: 'Error', content: Text(validationResult.errors ?? ''));
+      var sb = StringBuffer();
+
+      for (int i = 0; i < validationResult.errors.length; i++){
+        sb.write(validationResult.errors[i].message);
+        sb.write(" ");
+      }
+      Get.defaultDialog(title: 'Error', content: Text(sb.toString()));
       return false;
     }
 
