@@ -1,3 +1,4 @@
+import 'package:budget_app/domain/mappers/expense_category_mapper.dart';
 import 'package:budget_app/firebase_options.dart';
 import 'package:budget_app/presentation/bindings/create_expense_binding.dart';
 import 'package:budget_app/presentation/bindings/login_binding.dart';
@@ -33,6 +34,8 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Get.lazyPut<ExpenseCategoryMapper>(() => ExpenseCategoryMapper());
+
     return GetMaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(

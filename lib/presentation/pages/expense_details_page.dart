@@ -1,4 +1,5 @@
 import 'package:budget_app/data/dtos/expense.dto.dart';
+import 'package:budget_app/domain/mappers/expense_category_mapper.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
@@ -11,6 +12,7 @@ class ExpenseDetailsPage extends StatelessWidget{
   @override
   Widget build(BuildContext context) {
      var expense = Get.arguments as ExpenseDto;
+     var mapper = Get.find<ExpenseCategoryMapper>();
 
     return Scaffold(
       appBar: AppBar(
@@ -42,6 +44,12 @@ class ExpenseDetailsPage extends StatelessWidget{
                   style: Styles.captionStyle) ,
                   Text(expense.cost.toString(), style: const TextStyle(fontSize: 20),)             
                 ],),
+              const SizedBox(height: 5,),
+              Row(children: [
+                Text('Category: ', style: Styles.captionStyle,),
+                Text('${mapper.toDisplayString(expense.category)} ', style: const TextStyle(fontSize: 20),),
+                Icon(mapper.toIcon(expense.category), color: Colors.blueAccent)
+              ],),
               const SizedBox(height: 5,),
               Align(
                 alignment: Alignment.topLeft,

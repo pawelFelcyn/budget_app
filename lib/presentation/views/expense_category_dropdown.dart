@@ -1,4 +1,7 @@
+import 'package:budget_app/domain/mappers/expense_category_mapper.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
 
 import '../../data/dtos/expense_category.dart';
 
@@ -20,8 +23,10 @@ class _ExpenseCategoryDropdownState extends State<ExpenseCategoryDropdown>{
   final void Function(ExpenseCategory?) onCategoryChanged;
   late List<ExpenseCategory?> _allCategories;
   final bool allowNull;
+  late ExpenseCategoryMapper _mapper;
 
   _ExpenseCategoryDropdownState(this.onCategoryChanged, this.allowNull){
+    _mapper = Get.find<ExpenseCategoryMapper>();
     _allCategories = _getAllCateogries();
     _selctedCategory = _allCategories[0];
   }
@@ -41,7 +46,7 @@ class _ExpenseCategoryDropdownState extends State<ExpenseCategoryDropdown>{
       items: _allCategories.map<DropdownMenuItem<ExpenseCategory>>((value){
         return DropdownMenuItem<ExpenseCategory>(
           value: value,
-          child: Text(_getDisplayValue(value)));
+          child: Text(_mapper.toDisplayString(value)));
       }).toList(), 
       onChanged: (value){
         setState(() {
@@ -51,28 +56,6 @@ class _ExpenseCategoryDropdownState extends State<ExpenseCategoryDropdown>{
         });
       }
       );
-  }
-
-  String _getDisplayValue(ExpenseCategory? category){
-    switch (category){
-      case ExpenseCategory.food:
-        return "Food";
-      case ExpenseCategory.hygiene:
-        return "Hygiene";
-      case ExpenseCategory.medicationAndDrugs:
-        return "Medication and drugs";
-      case ExpenseCategory.clothes:
-        return "Clothes";
-      case ExpenseCategory.entertainment:
-        return "Entertainmnt";
-      case ExpenseCategory.rent:
-        return "Rent";
-      case ExpenseCategory.general:
-        return "General";
-      case null:
-      return "Any";
-    }
-
   }
 
   void _updateSelectedCategory(ExpenseCategory? newCategory){

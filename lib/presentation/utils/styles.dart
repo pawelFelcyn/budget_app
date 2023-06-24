@@ -29,7 +29,7 @@ class Styles{
 
   static TextStyle captionStyle = const TextStyle(
     fontSize: 25,
-    color: Colors.green
+    color: Colors.blueAccent
   );
 
   static TextStyle errorStyle = const TextStyle(
