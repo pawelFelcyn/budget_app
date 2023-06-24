@@ -27,7 +27,8 @@ class MyExpensesPage extends GetView<MyExpensesController> {
                   children: [
                     Expanded(
                       child: DateFilterSelectionDropdown(onDateRangeChanged: (start, end) {
-                        
+                        controller.dateFrom = start;
+                        controller.dateTo = end;
                       },),
                     ),
                   ],

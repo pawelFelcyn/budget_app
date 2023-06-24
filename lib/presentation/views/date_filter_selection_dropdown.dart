@@ -28,6 +28,7 @@ class _DateFilterSelectionDropdownState extends State<DateFilterSelectionDropdow
 
  _DateFilterSelectionDropdownState({required this.onDateRangeChanged}){
   _selectedOption = _dateFilterOptions[0];
+  _calculateDateRange();
  }
 
 
@@ -111,7 +112,7 @@ class _DateFilterSelectionDropdownState extends State<DateFilterSelectionDropdow
     } else if (_selectedOption == "Current year"){
       startDate = _getCurrentYearStartDate();
     } else if (_selectedOption == "Custom"){
-      startDate = _customEndDate;
+      startDate = _customStartDate;
       endDate = _customEndDate;
     }
 

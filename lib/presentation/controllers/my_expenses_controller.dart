@@ -6,6 +6,8 @@ import 'package:get/get.dart';
 class MyExpensesController extends ControllerBase{
   final RxList<ExpenseDto> expenses = <ExpenseDto>[].obs;
   final ExpenseService _service;
+  DateTime dateFrom = DateTime.now();
+  DateTime dateTo = DateTime.now();
 
   String selectedDateFilterOption = "Current week";
   MyExpensesController(this._service);
@@ -20,7 +22,7 @@ class MyExpensesController extends ControllerBase{
 
   void loadExpenses() async{
     expenses.clear();
-    var expensesFromFirebase = await _service.getAllExpenses();
+    var expensesFromFirebase = await _service.getAllExpenses(dateFrom, dateTo);
     for (int i = 0; i < expensesFromFirebase.length; i++){
       expenses.add(expensesFromFirebase[i]);
     }

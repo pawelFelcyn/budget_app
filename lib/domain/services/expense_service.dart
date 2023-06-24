@@ -32,7 +32,7 @@ class ExpenseServiceImpl extends ExpenseService{
   }
 
   @override
-  Future<List<ExpenseDto>> getAllExpenses() async {
+  Future<List<ExpenseDto>> getAllExpenses(DateTime from, DateTime to) async {
     try {
       User? user = FirebaseAuth.instance.currentUser;
       if (user == null) {
@@ -41,6 +41,8 @@ class ExpenseServiceImpl extends ExpenseService{
 
       final QuerySnapshot snapshot = await expensesRef
           .where('userId', isEqualTo: user.uid)
+          .where('createdAt', isGreaterThanOrEqualTo: from)
+          .where('createdAt', isLessThanOrEqualTo: to)
           // .orderBy('createdAt', descending: true)
           .get();
 
@@ -63,5 +65,5 @@ class ExpenseServiceImpl extends ExpenseService{
 
  abstract class ExpenseService{
   Future<FirebaseResponse> createExpense(CreateExpenseDto createExpenseDto);
-  Future<List<ExpenseDto>> getAllExpenses();
+  Future<List<ExpenseDto>> getAllExpenses(DateTime from, DateTime to);
 }
