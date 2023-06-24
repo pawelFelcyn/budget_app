@@ -1,6 +1,8 @@
 import 'package:budget_app/domain/mappers/expense_category_mapper.dart';
+import 'package:budget_app/domain/mappers/incom_category_mapper.dart';
 import 'package:budget_app/firebase_options.dart';
 import 'package:budget_app/presentation/bindings/create_expense_binding.dart';
+import 'package:budget_app/presentation/bindings/create_incom_binding.dart';
 import 'package:budget_app/presentation/bindings/login_binding.dart';
 import 'package:budget_app/presentation/bindings/my_expenses_binding.dart';
 import 'package:budget_app/presentation/bindings/my_incoms_binding.dart';
@@ -38,6 +40,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Get.lazyPut<ExpenseCategoryMapper>(() => ExpenseCategoryMapper());
+    Get.lazyPut<IncomCategoryMapper>(() => IncomCategoryMapper());
 
     return GetMaterialApp(
       title: 'Flutter Demo',
@@ -69,7 +72,9 @@ class MyApp extends StatelessWidget {
         binding: MyIncomsBinding()
         ),
         GetPage(name: '/myincoms/create', 
-        page: () => const CreateIncomPage()),
+        page: () => const CreateIncomPage(),
+        binding: CreateIncomBinding()
+        ),
       ],
     );
   }
