@@ -81,6 +81,12 @@ class MyExpensesPage extends GetView<MyExpensesController> {
                                   Expanded(
                                     child: Align(
                                       alignment: Alignment.centerRight,
+                                      child: Icon(controller.getCategoryIcon(controller.expenses[index].category), color: Colors.blueAccent,)
+                                      )
+                                    ),
+                                  Expanded(
+                                    child: Align(
+                                      alignment: Alignment.centerRight,
                                       child: Text(
                                         controller.expenses[index].cost
                                             .toString(),
