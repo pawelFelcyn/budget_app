@@ -89,8 +89,10 @@ class CreateExpensePage extends GetView<CreateExpenseController>{
                 SizedBox(width: 300,
                   child: Expanded(
                     child: ExpenseCategoryDropdown(onCategoryChanged: (category){
-                      controller.dto.value.category = category;
-                                  }),
+                      if (category != null){
+                        controller.dto.value.category = category;
+                      }
+                    }),
                   ),),
                 const SizedBox(height: 10,),
                 SizedBox(

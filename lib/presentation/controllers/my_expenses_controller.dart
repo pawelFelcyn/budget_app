@@ -12,6 +12,7 @@ class MyExpensesController extends ControllerBase{
   final ExpenseService _service;
   DateTime dateFrom = DateTime.now();
   DateTime dateTo = DateTime.now();
+  ExpenseCategory? filterCategory;
 
   String selectedDateFilterOption = "Current week";
   MyExpensesController(this._service);
@@ -26,7 +27,7 @@ class MyExpensesController extends ControllerBase{
 
   void loadExpenses() async{
     expenses.clear();
-    var expensesFromFirebase = await _service.getAllExpenses(dateFrom, dateTo);
+    var expensesFromFirebase = await _service.getAllExpenses(dateFrom, dateTo, filterCategory);
     for (int i = 0; i < expensesFromFirebase.length; i++){
       expenses.add(expensesFromFirebase[i]);
     }

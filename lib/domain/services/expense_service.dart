@@ -35,19 +35,22 @@ class ExpenseServiceImpl extends ExpenseService{
   }
 
   @override
-  Future<List<ExpenseDto>> getAllExpenses(DateTime from, DateTime to) async {
+  Future<List<ExpenseDto>> getAllExpenses(DateTime from, DateTime to, ExpenseCategory? filterCategory) async {
     try {
       User? user = FirebaseAuth.instance.currentUser;
       if (user == null) {
         throw Exception('User not authenticated.');
       }
 
-      final QuerySnapshot snapshot = await expensesRef
+      var query = expensesRef
           .where('userId', isEqualTo: user.uid)
           .where('createdAt', isGreaterThanOrEqualTo: from)
-          .where('createdAt', isLessThanOrEqualTo: to)
-          // .orderBy('createdAt', descending: true)
-          .get();
+          .where('createdAt', isLessThanOrEqualTo: to);
+      if (filterCategory != null){
+        query = query.where('category', isEqualTo: filterCategory.toString().split('.').last);
+      }
+      
+      final snapshot = await query.get();
 
       var result = snapshot.docs.map((doc) {
         final expenseData = doc.data() as Map<String, dynamic>;
@@ -73,5 +76,5 @@ class ExpenseServiceImpl extends ExpenseService{
 
  abstract class ExpenseService{
   Future<FirebaseResponse> createExpense(CreateExpenseDto createExpenseDto);
-  Future<List<ExpenseDto>> getAllExpenses(DateTime from, DateTime to);
+  Future<List<ExpenseDto>> getAllExpenses(DateTime from, DateTime to, ExpenseCategory? filterCategory);
 }

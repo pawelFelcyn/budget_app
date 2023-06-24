@@ -1,4 +1,5 @@
 import 'package:budget_app/presentation/controllers/my_expenses_controller.dart';
+import 'package:budget_app/presentation/views/expense_category_dropdown.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get_state_manager/src/rx_flutter/rx_obx_widget.dart';
 import 'package:get/get_state_manager/src/simple/get_view.dart';
@@ -33,6 +34,10 @@ class MyExpensesPage extends GetView<MyExpensesController> {
                     ),
                   ],
                 ),
+                Row(children: [
+                  const Text('Category: ', style: TextStyle(color: Colors.blueAccent, fontSize: 18),),
+                  Expanded(child: ExpenseCategoryDropdown(onCategoryChanged: (value){controller.filterCategory = value;}, allowNull: true,))
+                ],),
                 Row(
                   children: [
                     Expanded(

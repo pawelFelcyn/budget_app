@@ -3,24 +3,34 @@ import 'package:flutter/material.dart';
 import '../../data/dtos/expense_category.dart';
 
 class ExpenseCategoryDropdown extends StatefulWidget{
-  final void Function(ExpenseCategory) onCategoryChanged;
+  final void Function(ExpenseCategory?) onCategoryChanged;
+  final bool allowNull;
 
-  const ExpenseCategoryDropdown({super.key, required this.onCategoryChanged});
+  const ExpenseCategoryDropdown({super.key, required this.onCategoryChanged, this.allowNull = false});
   
   @override
   State<StatefulWidget> createState() {
     // ignore: no_logic_in_create_state
-    return _ExpenseCategoryDropdownState(onCategoryChanged);
+    return _ExpenseCategoryDropdownState(onCategoryChanged, allowNull);
   }
 }
 
 class _ExpenseCategoryDropdownState extends State<ExpenseCategoryDropdown>{
-  late ExpenseCategory _selctedCategory;
-  final void Function(ExpenseCategory) onCategoryChanged;
-  final _allCategories = ExpenseCategory.values;
+  late ExpenseCategory? _selctedCategory;
+  final void Function(ExpenseCategory?) onCategoryChanged;
+  late List<ExpenseCategory?> _allCategories;
+  final bool allowNull;
 
-  _ExpenseCategoryDropdownState(this.onCategoryChanged){
-    _selctedCategory = ExpenseCategory.general;
+  _ExpenseCategoryDropdownState(this.onCategoryChanged, this.allowNull){
+    _allCategories = _getAllCateogries();
+    _selctedCategory = _allCategories[0];
+  }
+
+  List<ExpenseCategory?> _getAllCateogries(){
+    if (allowNull){
+      return <ExpenseCategory?>[null] + ExpenseCategory.values;
+    }
+    return ExpenseCategory.values;
   }
 
   @override
@@ -43,7 +53,7 @@ class _ExpenseCategoryDropdownState extends State<ExpenseCategoryDropdown>{
       );
   }
 
-  String _getDisplayValue(ExpenseCategory category){
+  String _getDisplayValue(ExpenseCategory? category){
     switch (category){
       case ExpenseCategory.food:
         return "Food";
@@ -57,12 +67,15 @@ class _ExpenseCategoryDropdownState extends State<ExpenseCategoryDropdown>{
         return "Entertainmnt";
       case ExpenseCategory.rent:
         return "Rent";
-      default:
+      case ExpenseCategory.general:
         return "General";
+      case null:
+      return "Any";
     }
+
   }
 
-  void _updateSelectedCategory(ExpenseCategory newCategory){
+  void _updateSelectedCategory(ExpenseCategory? newCategory){
     _selctedCategory = newCategory;
     onCategoryChanged(_selctedCategory);
   }
