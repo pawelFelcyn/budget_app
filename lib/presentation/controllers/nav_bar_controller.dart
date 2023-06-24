@@ -8,7 +8,11 @@ class NavBarController extends ControllerBase{
     Get.toNamed('/login');
   }
 
-  goToMyExpenses(){
+  void goToMyExpenses(){
     Get.toNamed('/myexpenses');
+  }
+
+  void goToMyIncoms(){
+    Get.toNamed('/myincoms');
   }
 }

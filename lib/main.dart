@@ -9,6 +9,7 @@ import 'package:budget_app/presentation/pages/expense_details_page.dart';
 import 'package:budget_app/presentation/pages/home_page.dart';
 import 'package:budget_app/presentation/pages/login_page.dart';
 import 'package:budget_app/presentation/pages/my_expenses_page.dart';
+import 'package:budget_app/presentation/pages/my_incoms_page.dart';
 import 'package:budget_app/presentation/pages/register_page.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -60,7 +61,10 @@ class MyApp extends StatelessWidget {
         ),
         GetPage(name: '/myexpenses/create',
         page: () => CreateExpensePage(),
-        binding: CreateExpenseBinding())
+        binding: CreateExpenseBinding()),
+        GetPage(name: '/myincoms', 
+        page: () => MyIncomsPage(),
+        )
       ],
     );
   }
