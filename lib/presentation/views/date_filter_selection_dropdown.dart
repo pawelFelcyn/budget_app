@@ -33,23 +33,31 @@ class _DateFilterSelectionDropdownState extends State<DateFilterSelectionDropdow
 
   @override
   Widget build(BuildContext context) {
-    return DropdownButton(
-        value: _selectedOption,
-        items: _dateFilterOptions
-          .map<DropdownMenuItem<String>>((String value) {
-           return DropdownMenuItem<String>(
-             value: value,
-             child: _getDateFilterDropdownItem(value, context),
-           );
-         }).toList(),
-         onChanged: (v) {
-           setState(() {
-             if (v != null){
-             _selectedOption = v;
-             _calculateDateRange();
-           }
-           });
-         });
+    return Row(
+      children: [
+        const Text('Date: ', style: TextStyle(color: Colors.blueAccent, fontSize: 18),),
+        Expanded(
+          child: DropdownButton(
+              value: _selectedOption,
+              isExpanded: true,
+              items: _dateFilterOptions
+                .map<DropdownMenuItem<String>>((String value) {
+                 return DropdownMenuItem<String>(
+                   value: value,
+                   child: _getDateFilterDropdownItem(value, context),
+                 );
+               }).toList(),
+               onChanged: (v) {
+                 setState(() {
+                   if (v != null){
+                   _selectedOption = v;
+                   _calculateDateRange();
+                 }
+                 });
+               }),
+        ),
+      ],
+    );
   }
 
   Widget _getDateFilterDropdownItem(String selection, BuildContext context) {
@@ -71,7 +79,8 @@ class _DateFilterSelectionDropdownState extends State<DateFilterSelectionDropdow
             });
           },);
         },
-        child: Text('From: ${DateFormat('dd.MM.yy').format(_customStartDate)}')
+        child: Text('From: ${DateFormat('dd.MM.yy').format(_customStartDate)}', 
+          style: const TextStyle(color: Colors.blueAccent),)
         ),
       const SizedBox(width: 10,),
       TextButton(
@@ -85,7 +94,8 @@ class _DateFilterSelectionDropdownState extends State<DateFilterSelectionDropdow
             });
           },);
         },
-        child: Text('To: ${DateFormat('dd.MM.yy').format(_customStartDate)}')
+        child: Text('To: ${DateFormat('dd.MM.yy').format(_customStartDate)}',
+           style: const TextStyle(color: Colors.blueAccent),)
         ),
       const SizedBox(width: 10,)
     ],); 
