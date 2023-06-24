@@ -32,5 +32,7 @@ class MyIncomsController extends ControllerBase{
     return _mapper.toIcon(category);
   }
 
-  void goToDetailsPage(expens) {}
+  void goToDetailsPage(incom) {
+    Get.toNamed('/myincoms/details', arguments: incom);
+  }
 }

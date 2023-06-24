@@ -11,6 +11,7 @@ import 'package:budget_app/presentation/pages/create_expense_page.dart';
 import 'package:budget_app/presentation/pages/create_incom_page.dart';
 import 'package:budget_app/presentation/pages/expense_details_page.dart';
 import 'package:budget_app/presentation/pages/home_page.dart';
+import 'package:budget_app/presentation/pages/incom_details_page.dart';
 import 'package:budget_app/presentation/pages/login_page.dart';
 import 'package:budget_app/presentation/pages/my_expenses_page.dart';
 import 'package:budget_app/presentation/pages/my_incoms_page.dart';
@@ -75,6 +76,8 @@ class MyApp extends StatelessWidget {
         page: () => const CreateIncomPage(),
         binding: CreateIncomBinding()
         ),
+        GetPage(name: '/myincoms/details',
+        page: () => const IncomDetailsPage())
       ],
     );
   }
