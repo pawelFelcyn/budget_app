@@ -7,6 +7,7 @@ class MyExpensesController extends ControllerBase{
   final RxList<ExpenseDto> expenses = <ExpenseDto>[].obs;
   final ExpenseService _service;
 
+  String selectedDateFilterOption = "Current week";
   MyExpensesController(this._service);
 
   void goToDetailsPage(ExpenseDto dto){
