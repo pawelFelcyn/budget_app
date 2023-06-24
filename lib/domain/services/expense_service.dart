@@ -1,5 +1,6 @@
 import 'package:budget_app/data/dtos/create_expense_dto.dart';
 import 'package:budget_app/data/dtos/expense.dto.dart';
+import 'package:budget_app/data/dtos/expense_category.dart';
 import 'package:budget_app/data/responses/firebase_response.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -11,7 +12,8 @@ class ExpenseServiceImpl extends ExpenseService{
 
   @override
   Future<FirebaseResponse> createExpense(CreateExpenseDto createExpenseDto) async {
-    var expenseDto = ExpenseDto.createdNow(createExpenseDto.title, createExpenseDto.cost, description: createExpenseDto.description);
+    var expenseDto = ExpenseDto.createdNow(createExpenseDto.title, createExpenseDto.cost, 
+    description: createExpenseDto.description, category: createExpenseDto.category);
     try {
       User? user = FirebaseAuth.instance.currentUser;
       if (user == null) {
@@ -24,6 +26,7 @@ class ExpenseServiceImpl extends ExpenseService{
         'cost': expenseDto.cost,
         'description': expenseDto.description,
         'createdAt': expenseDto.craetedAt,
+        'category': expenseDto.category.toString().split('.').last
       });
       return FirebaseResponse.succes();
     } on Exception catch (e) {
@@ -53,6 +56,7 @@ class ExpenseServiceImpl extends ExpenseService{
           cost: expenseData['cost'],
           description: expenseData['description'],
           craetedAt: expenseData['createdAt'].toDate(),
+          category: _parseCategory(expenseData['category'])
         );
       }).toList();
       result.sort((a,b) => a.craetedAt.compareTo(b.craetedAt));
@@ -60,6 +64,10 @@ class ExpenseServiceImpl extends ExpenseService{
     } catch (e) {
       throw Exception('Failed to get expenses: $e');
     }
+  }
+
+  ExpenseCategory _parseCategory(String value){
+    return ExpenseCategory.values.firstWhere((element) => element.toString().split('.').last == value);
   }
 }
 

@@ -1,5 +1,6 @@
 import 'package:budget_app/presentation/controllers/create_expense_controller.dart';
 import 'package:budget_app/presentation/utils/styles.dart';
+import 'package:budget_app/presentation/views/expense_category_dropdown.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get_state_manager/src/rx_flutter/rx_getx_widget.dart';
@@ -84,6 +85,13 @@ class CreateExpensePage extends GetView<CreateExpenseController>{
                       ],
                     ),),
                 ),
+                const SizedBox(height: 10,),
+                SizedBox(width: 300,
+                  child: Expanded(
+                    child: ExpenseCategoryDropdown(onCategoryChanged: (category){
+                      controller.dto.value.category = category;
+                                  }),
+                  ),),
                 const SizedBox(height: 10,),
                 SizedBox(
                   width: 300,
