@@ -3,8 +3,10 @@ import 'package:budget_app/firebase_options.dart';
 import 'package:budget_app/presentation/bindings/create_expense_binding.dart';
 import 'package:budget_app/presentation/bindings/login_binding.dart';
 import 'package:budget_app/presentation/bindings/my_expenses_binding.dart';
+import 'package:budget_app/presentation/bindings/my_incoms_binding.dart';
 import 'package:budget_app/presentation/bindings/register_binding.dart';
 import 'package:budget_app/presentation/pages/create_expense_page.dart';
+import 'package:budget_app/presentation/pages/create_incom_page.dart';
 import 'package:budget_app/presentation/pages/expense_details_page.dart';
 import 'package:budget_app/presentation/pages/home_page.dart';
 import 'package:budget_app/presentation/pages/login_page.dart';
@@ -60,11 +62,14 @@ class MyApp extends StatelessWidget {
           page: () => const ExpenseDetailsPage()
         ),
         GetPage(name: '/myexpenses/create',
-        page: () => CreateExpensePage(),
+        page: () => const CreateExpensePage(),
         binding: CreateExpenseBinding()),
         GetPage(name: '/myincoms', 
-        page: () => MyIncomsPage(),
-        )
+        page: () => const MyIncomsPage(),
+        binding: MyIncomsBinding()
+        ),
+        GetPage(name: '/myincoms/create', 
+        page: () => const CreateIncomPage()),
       ],
     );
   }

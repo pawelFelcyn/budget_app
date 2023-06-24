@@ -1,8 +1,10 @@
+import 'package:budget_app/presentation/controllers/my_incoms_controller.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get_state_manager/src/simple/get_view.dart';
 
 import '../views/nav_bar.dart';
 
-class MyIncomsPage extends StatelessWidget{
+class MyIncomsPage extends GetView<MyIncomsComtroller>{
   const MyIncomsPage({super.key});
 
   @override
@@ -13,6 +15,10 @@ class MyIncomsPage extends StatelessWidget{
         title: const Text('My incoms'),
       ),
       body: Text('incoms page'),
+      floatingActionButton: FloatingActionButton(
+        onPressed: controller.goToCreateNewView,
+        child: const Icon(Icons.add),
+      ),
     );
   }
 
