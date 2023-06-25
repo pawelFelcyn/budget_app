@@ -34,6 +34,11 @@ class NavBar extends StatelessWidget {
                       onPressed: _controller.goToMyIncoms, 
                       child: const Text('My incoms', style: TextStyle(color: Colors.blueAccent))
                     ),
+                     TextButton(
+                      style: Styles.flyoutActionButtonStyle,
+                      onPressed: _controller.goToAnalysis, 
+                      child: const Text('Analysis', style: TextStyle(color: Colors.blueAccent))
+                    ),
                   ],
                 ),
               ),),

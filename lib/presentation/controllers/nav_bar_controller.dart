@@ -15,4 +15,8 @@ class NavBarController extends ControllerBase{
   void goToMyIncoms(){
     Get.toNamed('/myincoms');
   }
+
+  void goToAnalysis() {
+    Get.toNamed('/analysis');
+  }
 }

@@ -7,6 +7,7 @@ import 'package:budget_app/presentation/bindings/login_binding.dart';
 import 'package:budget_app/presentation/bindings/my_expenses_binding.dart';
 import 'package:budget_app/presentation/bindings/my_incoms_binding.dart';
 import 'package:budget_app/presentation/bindings/register_binding.dart';
+import 'package:budget_app/presentation/pages/analysis_page.dart';
 import 'package:budget_app/presentation/pages/create_expense_page.dart';
 import 'package:budget_app/presentation/pages/create_incom_page.dart';
 import 'package:budget_app/presentation/pages/expense_details_page.dart';
@@ -77,7 +78,9 @@ class MyApp extends StatelessWidget {
         binding: CreateIncomBinding()
         ),
         GetPage(name: '/myincoms/details',
-        page: () => const IncomDetailsPage())
+        page: () => const IncomDetailsPage()),
+        GetPage(name: '/analysis',
+        page: () => const AnalysisPage())
       ],
     );
   }
