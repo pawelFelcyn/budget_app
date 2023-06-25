@@ -1,5 +1,6 @@
 import 'package:budget_app/domain/mappers/expense_category_mapper.dart';
 import 'package:budget_app/domain/mappers/incom_category_mapper.dart';
+import 'package:budget_app/domain/services/bilance_chart_data_provider.dart';
 import 'package:budget_app/domain/services/expense_service.dart';
 import 'package:budget_app/domain/services/expenses_chart_data_provider.dart';
 import 'package:budget_app/domain/services/incom_service.dart';
@@ -57,6 +58,7 @@ class MyApp extends StatelessWidget {
       Get.find<IncomService>(), 
       Get.find<IncomCategoryMapper>())
     );
+    Get.lazyPut<BilanceChartDataProvider>(() => BilanceChartDataProvider());
 
     return GetMaterialApp(
       title: 'Flutter Demo',

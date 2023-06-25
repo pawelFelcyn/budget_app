@@ -1,5 +1,7 @@
+import 'package:budget_app/domain/services/bilance_chart_data_provider.dart';
 import 'package:budget_app/domain/services/expenses_chart_data_provider.dart';
 import 'package:budget_app/domain/services/incoms_chart_data_provider.dart';
+import 'package:budget_app/presentation/views/bilance_view.dart';
 import 'package:budget_app/presentation/views/nav_bar.dart';
 import 'package:budget_app/presentation/views/pie_chart_view.dart';
 import 'package:flutter/material.dart';
@@ -26,7 +28,7 @@ class AnalysisPage extends StatelessWidget{
         body: TabBarView(children: [
           PieChartView(Get.find<ExpensesChartDataProvider>(), title: 'Expenses'),
           PieChartView(Get.find<IncomsChartDataProvider>(), title: 'Incoms'),
-          Text('balance')
+          BilanceView(Get.find<BilanceChartDataProvider>())
         ]),)
       );
   }
