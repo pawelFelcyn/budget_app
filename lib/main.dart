@@ -2,6 +2,8 @@ import 'package:budget_app/domain/mappers/expense_category_mapper.dart';
 import 'package:budget_app/domain/mappers/incom_category_mapper.dart';
 import 'package:budget_app/domain/services/expense_service.dart';
 import 'package:budget_app/domain/services/expenses_chart_data_provider.dart';
+import 'package:budget_app/domain/services/incom_service.dart';
+import 'package:budget_app/domain/services/incoms_chart_data_provider.dart';
 import 'package:budget_app/firebase_options.dart';
 import 'package:budget_app/presentation/bindings/create_expense_binding.dart';
 import 'package:budget_app/presentation/bindings/create_incom_binding.dart';
@@ -46,9 +48,14 @@ class MyApp extends StatelessWidget {
     Get.lazyPut<ExpenseCategoryMapper>(() => ExpenseCategoryMapper());
     Get.lazyPut<IncomCategoryMapper>(() => IncomCategoryMapper());
     Get.lazyPut<ExpenseService>(() => ExpenseServiceImpl());
+    Get.lazyPut<IncomService>(() => IncomServiceImpl());
     Get.lazyPut<ExpensesChartDataProvider>(() => ExpensesChartDataProvider(
       Get.find<ExpenseService>(), 
       Get.find<ExpenseCategoryMapper>())
+    );
+    Get.lazyPut<IncomsChartDataProvider>(() => IncomsChartDataProvider(
+      Get.find<IncomService>(), 
+      Get.find<IncomCategoryMapper>())
     );
 
     return GetMaterialApp(
