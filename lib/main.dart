@@ -58,7 +58,10 @@ class MyApp extends StatelessWidget {
       Get.find<IncomService>(), 
       Get.find<IncomCategoryMapper>())
     );
-    Get.lazyPut<BilanceChartDataProvider>(() => BilanceChartDataProvider());
+    Get.lazyPut<BilanceChartDataProvider>(() => BilanceChartDataProvider(
+      Get.find(),
+      Get.find()
+    ));
 
     return GetMaterialApp(
       title: 'Flutter Demo',
