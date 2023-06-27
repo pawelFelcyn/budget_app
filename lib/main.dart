@@ -16,7 +16,6 @@ import 'package:budget_app/presentation/pages/analysis_page.dart';
 import 'package:budget_app/presentation/pages/create_expense_page.dart';
 import 'package:budget_app/presentation/pages/create_incom_page.dart';
 import 'package:budget_app/presentation/pages/expense_details_page.dart';
-import 'package:budget_app/presentation/pages/home_page.dart';
 import 'package:budget_app/presentation/pages/incom_details_page.dart';
 import 'package:budget_app/presentation/pages/login_page.dart';
 import 'package:budget_app/presentation/pages/my_expenses_page.dart';
@@ -26,8 +25,6 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get/get_navigation/src/root/get_material_app.dart';
-import 'package:get/get_navigation/src/routes/get_route.dart';
 
 void main() async{
   WidgetsFlutterBinding.ensureInitialized();
@@ -41,7 +38,7 @@ class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
   String _getInitialRoute(){
-    return FirebaseAuth.instance.currentUser == null ? '/login' : '/home';
+    return FirebaseAuth.instance.currentUser == null ? '/login' : '/myexpenses';
   }
 
   @override
@@ -74,8 +71,6 @@ class MyApp extends StatelessWidget {
         GetPage(name: '/myexpenses', 
         page: () => const MyExpensesPage(),
         binding: MyExpensesBinding()),
-        GetPage(name: '/home', 
-        page: () => HomePage(),),
         GetPage(name: '/login', 
         page: () => const LoginPage(),
         binding: LoginBinding()),
