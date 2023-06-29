@@ -34,7 +34,7 @@ class PieChartViewState extends State<PieChartView>{
               children: [
                 Text(title, style: Styles.captionStyle),
                 DateFilterSelectionDropdown(onDateRangeChanged: (from, to) async{
-                  chartData = await _dataProvider.getChartData(from, to);
+                  chartData = (await _dataProvider.getChartData(from, to)).data;
                   setState((){});
                 }),
                 Expanded(

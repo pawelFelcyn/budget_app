@@ -1,4 +1,5 @@
 import 'package:budget_app/data/charts/chart_data.dart';
+import 'package:budget_app/data/charts/chart_data_result.dart';
 import 'package:budget_app/data/dtos/incom_category.dart';
 import 'package:budget_app/domain/mappers/incom_category_mapper.dart';
 import 'package:budget_app/domain/services/chart_data_provider.dart';
@@ -11,7 +12,7 @@ class IncomsChartDataProvider extends ChartDataProvider{
   IncomsChartDataProvider(this._service, this._mapper);
 
   @override
-  Future<List<ChartData>> getChartData(DateTime from, DateTime to) async{
+  Future<ChartDataResult> getChartData(DateTime from, DateTime to) async{
     var incoms = await _service.getAllIncoms(from, to, null);
 
     final Map<IncomCategory, double> groupedData = {};
@@ -33,7 +34,7 @@ class IncomsChartDataProvider extends ChartDataProvider{
       output.add(ChartData(label, value));
     }
 
-    return output;
+    return ChartDataResult.successful(output);
   }
 
 }

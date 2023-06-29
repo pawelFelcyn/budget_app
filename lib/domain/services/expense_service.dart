@@ -35,7 +35,7 @@ class ExpenseServiceImpl extends ExpenseService{
   }
 
   @override
-  Future<List<ExpenseDto>> getAllExpenses(DateTime from, DateTime to, ExpenseCategory? filterCategory) async {
+  Future<FirebaseGetResopnse<List<ExpenseDto>>> getAllExpenses(DateTime from, DateTime to, ExpenseCategory? filterCategory) async {
     try {
       User? user = FirebaseAuth.instance.currentUser;
       if (user == null) {
@@ -63,9 +63,9 @@ class ExpenseServiceImpl extends ExpenseService{
         );
       }).toList();
       result.sort((a,b) => a.craetedAt.compareTo(b.craetedAt));
-      return result;
-    } catch (e) {
-      throw Exception('Failed to get expenses: $e');
+      return FirebaseGetResopnse.succes(result);
+    } on Exception catch (e) {
+      return FirebaseGetResopnse.withError<List<ExpenseDto>>(e);
     }
   }
 
@@ -76,5 +76,5 @@ class ExpenseServiceImpl extends ExpenseService{
 
  abstract class ExpenseService{
   Future<FirebaseResponse> createExpense(CreateExpenseDto createExpenseDto);
-  Future<List<ExpenseDto>> getAllExpenses(DateTime from, DateTime to, ExpenseCategory? filterCategory);
+  Future<FirebaseGetResopnse<List<ExpenseDto>>> getAllExpenses(DateTime from, DateTime to, ExpenseCategory? filterCategory);
 }

@@ -32,7 +32,7 @@ class _BilanceViewState extends State<BilanceView>{
       child: Column(children: [
         Text('Bilance', style: Styles.captionStyle,),
         MonthsDropdown((months) async {
-          _chartData = await _dataProvider.getData(months);
+          _chartData = (await _dataProvider.getData(months)).data;
           setState(() {});
          }),
          SfCartesianChart(

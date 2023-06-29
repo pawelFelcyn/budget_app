@@ -15,6 +15,7 @@ class MyExpensesController extends ControllerBase{
   DateTime dateFrom = DateTime.now();
   DateTime dateTo = DateTime.now();
   ExpenseCategory? filterCategory;
+  Rx<bool> firebaseFailed = false.obs;
 
   String selectedDateFilterOption = "Current week";
   MyExpensesController(this._service, this._expenseCategoryMapper);
@@ -29,9 +30,15 @@ class MyExpensesController extends ControllerBase{
 
   void loadExpenses() async{
     expenses.clear();
-    var expensesFromFirebase = await _service.getAllExpenses(dateFrom, dateTo, filterCategory);
-    for (int i = 0; i < expensesFromFirebase.length; i++){
-      expenses.add(expensesFromFirebase[i]);
+    var expensesResult = await _service.getAllExpenses(dateFrom, dateTo, filterCategory);
+
+    if (!expensesResult.isSucces){
+      firebaseFailed.value = true;
+    }
+
+    firebaseFailed.value = false;
+    for (final expense in expensesResult.getContentUnsafe()){
+      expenses.add(expense);
     }
   }
 

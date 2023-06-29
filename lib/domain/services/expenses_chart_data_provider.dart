@@ -4,6 +4,8 @@ import 'package:budget_app/domain/mappers/expense_category_mapper.dart';
 import 'package:budget_app/domain/services/chart_data_provider.dart';
 import 'package:budget_app/domain/services/expense_service.dart';
 
+import '../../data/charts/chart_data_result.dart';
+
 class ExpensesChartDataProvider extends ChartDataProvider{
   final ExpenseService _expenseService;
   final ExpenseCategoryMapper _mapper;
@@ -11,12 +13,16 @@ class ExpensesChartDataProvider extends ChartDataProvider{
   ExpensesChartDataProvider(this._expenseService, this._mapper);
 
   @override
-  Future<List<ChartData>> getChartData(DateTime from, DateTime to) async {
-    var expenses = await _expenseService.getAllExpenses(from, to, null);
+  Future<ChartDataResult> getChartData(DateTime from, DateTime to) async {
+    var expensesResult = await _expenseService.getAllExpenses(from, to, null);
+
+    if (!expensesResult.isSucces){
+      return ChartDataResult.failure();
+    }
 
     final Map<ExpenseCategory, double> groupedData = {};
 
-    for (final expense in expenses){
+    for (final expense in expensesResult.getContentUnsafe()){
       if (groupedData.containsKey(expense.category)){
         groupedData[expense.category] = (groupedData[expense.category] as double) + expense.cost;
         continue;
@@ -33,6 +39,6 @@ class ExpensesChartDataProvider extends ChartDataProvider{
       output.add(ChartData(label, value));
     }
 
-    return output;
+    return ChartDataResult.successful(output);
   }
 }

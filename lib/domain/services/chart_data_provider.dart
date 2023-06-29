@@ -1,5 +1,5 @@
-import '../../data/charts/chart_data.dart';
+import '../../data/charts/chart_data_result.dart';
 
 abstract class ChartDataProvider{
-  Future<List<ChartData>> getChartData(DateTime from, DateTime to);
+  Future<ChartDataResult> getChartData(DateTime from, DateTime to);
 }

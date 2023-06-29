@@ -1,4 +1,5 @@
 import 'package:budget_app/data/charts/bilance_chart_data.dart';
+import 'package:budget_app/data/charts/bilance_chart_data_result.dart';
 import 'package:budget_app/data/charts/chart_data.dart';
 import 'package:budget_app/data/charts/groupped_bilance_chart_data.dart';
 import 'package:budget_app/data/dtos/expense.dto.dart';
@@ -13,11 +14,16 @@ class BilanceChartDataProvider{
 
   BilanceChartDataProvider(this._expenseService, this._incomService);
 
-  Future<List<BilanceChartData>> getData(int months) async{
+  Future<BilanceChartDataResult> getData(int months) async{
     final from = getDateMonthsAgo(months);
     final now = DateTime.now();
 
-    final expenses  = await _expenseService.getAllExpenses(from, now, null);
+    final expensesResult  = await _expenseService.getAllExpenses(from, now, null);
+
+    if (!expensesResult.isSucces){
+      return BilanceChartDataResult.failure();
+    }
+
     final incoms  = await _incomService.getAllIncoms(from, now, null);
 
     final output = <BilanceChartData>[];
@@ -28,7 +34,7 @@ class BilanceChartDataProvider{
     int month = from.month;
     
     while (year != interationFinishYear || month != interationFinishMonth){
-      final expensesSum = expenses
+      final expensesSum = expensesResult.getContentUnsafe()
       .where((element) => element.craetedAt.year == year && element.craetedAt.month == month)
       .fold(0.0, (previousValue, element) => previousValue + element.cost);
 
@@ -47,7 +53,7 @@ class BilanceChartDataProvider{
       month = 1;
       year++;
     }
-    return output;
+    return BilanceChartDataResult.successful(output);
   }
 
   DateTime getDateMonthsAgo(int months) {

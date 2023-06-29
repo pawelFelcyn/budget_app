@@ -12,3 +12,22 @@ class FirebaseResponse{
   static FirebaseResponse withErrorMessage(String message)
   => FirebaseResponse(false, true, null, message);
 }
+
+class FirebaseGetResopnse<T> extends FirebaseResponse{
+  final T? content;
+  
+  FirebaseGetResopnse(super.isSucces, super.errorOccured, 
+  super.error, super.errorMessage, this.content);
+
+  T getContentUnsafe(){
+    return content as T;
+  }
+
+
+  static FirebaseGetResopnse<TResponse> succes<TResponse>(TResponse content) 
+    => FirebaseGetResopnse<TResponse>(true, false, null, null, content);
+  static FirebaseGetResopnse<TResponse> withError<TResponse>(Exception error)
+    => FirebaseGetResopnse<TResponse>(false, true, error, null, null);
+  static FirebaseGetResopnse<TResponse> withErrorMessage<TResponse>(String message)
+  => FirebaseGetResopnse<TResponse>(false, true, null, message, null);
+}
