@@ -71,7 +71,10 @@ class BilanceView extends StatelessWidget{
               isVisible: true,
               position: LegendPosition.bottom
             ),
-            primaryXAxis: CategoryAxis(),
+            primaryXAxis: CategoryAxis(
+              labelRotation: -45,
+              labelIntersectAction: AxisLabelIntersectAction.rotate45
+            ),
             series: <ColumnSeries>[
               ColumnSeries<BilanceChartData, String>(
                 dataSource: _controller.dataResut.value.data, 
