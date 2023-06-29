@@ -60,4 +60,19 @@ class MyIncomsController extends ControllerBase{
   void goToDetailsPage(incom) {
     Get.toNamed('/myincoms/details', arguments: incom);
   }
+
+  void deleteIncom(IncomDto incom)  async{
+    final confirmation = await showConfirmationDialog('Confirmation', 'Are you sure you want to delete this expense?');
+     if (!confirmation){
+      return;
+     }
+
+     final deletionResult = _service.deleteById(incom.id);
+     if (!deletionResult.isSucces){
+      handleErrorFirebaseResponse(deletionResult);
+      return;
+     }
+
+     incoms.remove(incom);
+  }
 }

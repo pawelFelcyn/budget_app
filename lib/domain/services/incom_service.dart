@@ -9,6 +9,7 @@ import '../../data/responses/firebase_response.dart';
 abstract class IncomService{
   Future<FirebaseResponse> createIncom(CreateIncomDto dto);
   Future<FirebaseGetResopnse<List<IncomDto>>> getAllIncoms(DateTime from, DateTime to, IncomCategory? filterCategory);
+  FirebaseResponse deleteById(String id);
 } 
 
 class IncomServiceImpl extends IncomService{
@@ -17,8 +18,6 @@ class IncomServiceImpl extends IncomService{
   
   @override
   Future<FirebaseResponse> createIncom(CreateIncomDto dto) async{
-     var expenseDto = IncomDto.createdNow(dto.title, dto.amount, 
-    description: dto.description, category: dto.category);
     try {
       User? user = FirebaseAuth.instance.currentUser;
       if (user == null) {
@@ -27,11 +26,11 @@ class IncomServiceImpl extends IncomService{
 
       await incomsRef.add({
         'userId': user.uid,
-        'title': expenseDto.title,
-        'amount': expenseDto.amount,
-        'description': expenseDto.description,
-        'createdAt': expenseDto.craetedAt,
-        'category': expenseDto.category.toString().split('.').last
+        'title': dto.title,
+        'amount': dto.amount,
+        'description': dto.description,
+        'createdAt': DateTime.now(),
+        'category': dto.category.toString().split('.').last
       });
       return FirebaseResponse.succes();
     } on Exception catch (e) {
@@ -60,6 +59,7 @@ class IncomServiceImpl extends IncomService{
       var result = snapshot.docs.map((doc) {
         final expenseData = doc.data() as Map<String, dynamic>;
         return IncomDto(
+          id: doc.id,
           title: expenseData['title'],
           amount: expenseData['amount'],
           description: expenseData['description'],
@@ -76,5 +76,16 @@ class IncomServiceImpl extends IncomService{
 
   IncomCategory _parseCategory(String value){
     return IncomCategory.values.firstWhere((element) => element.toString().split('.').last == value);
+  }
+  
+  @override
+  FirebaseResponse deleteById(String id) {
+     try{
+      final DocumentReference documentRef = incomsRef.doc(id);
+      documentRef.delete();
+      return FirebaseResponse.succes();
+    } on Exception catch(e){
+      return FirebaseResponse.withError(e);
+    }
   }
 }

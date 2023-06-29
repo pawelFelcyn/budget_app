@@ -112,30 +112,39 @@ class MyIncomsPage extends ViewBase<MyIncomsController>{
                 child: Row(
                   children: [
                     const SizedBox(
-                      width: 20,
-                    ),
-                    Text(
-                      ctrl.incoms[index].title,
-                      style: const TextStyle(fontSize: 20),
+                      width: 3,
                     ),
                     Expanded(
+                      flex: 1,
+                      child: Text(
+                        ctrl.incoms[index].title,
+                        style: const TextStyle(fontSize: 20),
+                      ),
+                    ),
+                    const SizedBox(width: 3,),
+                    Expanded(
+                      flex: 1,
                       child: Align(
                         alignment: Alignment.centerRight,
                         child: Icon(ctrl.getCategoryIcon(ctrl.incoms[index].category), color: Colors.blueAccent,)
                         )
                       ),
+                      const SizedBox(width: 3,),
                     Expanded(
+                      flex: 1,
                       child: Align(
                         alignment: Alignment.centerRight,
                         child: Text(
                           controller.incoms[index].amount
                               .toString(),
                           style: const TextStyle(
-                              fontSize: 25, color: Colors.green),
+                              fontSize: 20, color: Colors.green),
                         ),
                       ),
                     ),
+                    const SizedBox(width: 3),
                     Expanded(
+                      flex: 1,
                         child: Align(
                       alignment: Alignment.centerRight,
                       child: TextButton(
@@ -151,7 +160,23 @@ class MyIncomsPage extends ViewBase<MyIncomsController>{
                       ),
                     )),
                     const SizedBox(
-                      width: 10,
+                      width: 3,
+                    ),
+                    Expanded(
+                      flex: 1, 
+                      child: TextButton(
+                        onPressed: (){
+                          ctrl.deleteIncom(ctrl.incoms[index]);
+                        },
+                        style: Styles.deleteButtonStyle,
+                        child: const Text(
+                          'Delete',
+                          style: TextStyle(color: Colors.white),
+                        ),
+                      ),
+                    ),
+                    const SizedBox(
+                      width: 3,
                     )
                   ],
                 ),
