@@ -8,7 +8,7 @@ import '../../data/responses/firebase_response.dart';
 
 abstract class IncomService{
   Future<FirebaseResponse> createIncom(CreateIncomDto dto);
-  Future<List<IncomDto>> getAllIncoms(DateTime from, DateTime to, IncomCategory? filterCategory);
+  Future<FirebaseGetResopnse<List<IncomDto>>> getAllIncoms(DateTime from, DateTime to, IncomCategory? filterCategory);
 } 
 
 class IncomServiceImpl extends IncomService{
@@ -40,11 +40,11 @@ class IncomServiceImpl extends IncomService{
   }
 
    @override
-  Future<List<IncomDto>> getAllIncoms(DateTime from, DateTime to, IncomCategory? filterCategory) async {
+  Future<FirebaseGetResopnse<List<IncomDto>>> getAllIncoms(DateTime from, DateTime to, IncomCategory? filterCategory) async {
     try {
       User? user = FirebaseAuth.instance.currentUser;
       if (user == null) {
-        throw Exception('User not authenticated.');
+        return FirebaseGetResopnse.withErrorMessage('You are not authenticated');
       }
 
       var query = incomsRef
@@ -68,9 +68,9 @@ class IncomServiceImpl extends IncomService{
         );
       }).toList();
       result.sort((a,b) => a.craetedAt.compareTo(b.craetedAt));
-      return result;
-    } catch (e) {
-      throw Exception('Failed to get expenses: $e');
+      return FirebaseGetResopnse.succes(result);
+    } on Exception catch (e) {
+      return FirebaseGetResopnse.withError(e);
     }
   }
 

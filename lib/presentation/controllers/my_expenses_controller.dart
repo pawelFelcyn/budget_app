@@ -33,6 +33,7 @@ class MyExpensesController extends ControllerBase{
 
     if (!expensesResult.isSucces){
       firebaseFailed.value = true;
+      return;
     }
 
     firebaseFailed.value = false;

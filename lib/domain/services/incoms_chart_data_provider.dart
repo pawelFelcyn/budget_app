@@ -13,11 +13,15 @@ class IncomsChartDataProvider extends ChartDataProvider{
 
   @override
   Future<ChartDataResult> getChartData(DateTime from, DateTime to) async{
-    var incoms = await _service.getAllIncoms(from, to, null);
+    var incomsResult = await _service.getAllIncoms(from, to, null);
+
+    if (!incomsResult.isSucces){
+      return ChartDataResult.failure();
+    }
 
     final Map<IncomCategory, double> groupedData = {};
 
-    for (final incom in incoms){
+    for (final incom in incomsResult.getContentUnsafe()){
       if (groupedData.containsKey(incom.category)){
         groupedData[incom.category] = (groupedData[incom.category] as double) + incom.amount;
         continue;

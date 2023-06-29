@@ -22,7 +22,11 @@ class BilanceChartDataProvider{
       return BilanceChartDataResult.failure();
     }
 
-    final incoms  = await _incomService.getAllIncoms(from, now, null);
+    final incomsResult  = await _incomService.getAllIncoms(from, now, null);
+
+    if (!incomsResult.isSucces){
+      return BilanceChartDataResult.failure();
+    }
 
     final output = <BilanceChartData>[];
 
@@ -36,7 +40,7 @@ class BilanceChartDataProvider{
       .where((element) => element.craetedAt.year == year && element.craetedAt.month == month)
       .fold(0.0, (previousValue, element) => previousValue + element.cost);
 
-      final incomsSum = incoms
+      final incomsSum = incomsResult.getContentUnsafe()
       .where((element) => element.craetedAt.year == year && element.craetedAt.month == month)
       .fold(0.0, (previousValue, element) => previousValue + element.amount);
 

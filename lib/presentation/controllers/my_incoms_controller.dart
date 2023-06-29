@@ -13,7 +13,8 @@ class MyIncomsController extends ControllerBase{
   final RxList<IncomDto> incoms = <IncomDto>[].obs;
   final IncomCategoryMapper _mapper;
   final IncomService _service;
-
+  Rx<bool> firebaseFailed = false.obs;
+ 
   MyIncomsController(this._service, this._mapper);
 
   void goToCreateNewView(){
@@ -22,9 +23,16 @@ class MyIncomsController extends ControllerBase{
 
   void loadIncoms() async{
      incoms.clear();
-    var expensesFromFirebase = await _service.getAllIncoms(dateFrom, dateTo, filterCategory);
-    for (int i = 0; i < expensesFromFirebase.length; i++){
-      incoms.add(expensesFromFirebase[i]);
+    var incomsResult = await _service.getAllIncoms(dateFrom, dateTo, filterCategory);
+
+    if (!incomsResult.isSucces){
+      firebaseFailed.value = true;
+      return;
+    }
+
+    firebaseFailed.value = false;
+    for (final incom in incomsResult.getContentUnsafe()){
+      incoms.add(incom);
     }
   }
 
