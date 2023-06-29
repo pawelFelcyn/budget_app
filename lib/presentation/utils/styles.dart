@@ -13,6 +13,18 @@ class Styles{
     )
   );
 
+  static ButtonStyle deleteButtonStyle = ButtonStyle(
+    backgroundColor: MaterialStateProperty.all<Color>(Colors.red),
+    overlayColor: MaterialStateProperty.all<Color>(Colors.red),
+    shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+      RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(15),
+        side: const BorderSide(color: Colors.red)
+      )
+    )
+  );
+
+
   static ButtonStyle secondaryButtonStyle = ButtonStyle(
     backgroundColor: MaterialStateProperty.all<Color>(Colors.white),
     overlayColor: MaterialStateProperty.all<Color>(Colors.lightGreen),

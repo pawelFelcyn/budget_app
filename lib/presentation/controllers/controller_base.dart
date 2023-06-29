@@ -52,4 +52,32 @@ abstract class ControllerBase extends GetxController{
       child: Text(error.message, style: Styles.errorStyle,)
     );
   }
+
+  Future<bool> showConfirmationDialog(String title, String message) async{
+    bool selection = false;
+    await Get.dialog<bool>(
+      AlertDialog(
+        title: Text(title),
+        content: Text(message),
+        actions: <Widget>[
+          TextButton(
+            child: const Text('No'),
+            onPressed: () {
+              selection = false;
+              Get.back(result: false);
+            },
+          ),
+          TextButton(
+            child: const Text('Yes'),
+            onPressed: () {
+              selection = true;
+              Get.back(result: true);
+            },
+          ),
+        ],
+      ),
+    );
+
+    return selection;
+  }
 }

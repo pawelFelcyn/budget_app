@@ -113,19 +113,26 @@ class MyExpensesPage extends ViewBase<MyExpensesController> {
                 child: Row(
                   children: [
                     const SizedBox(
-                      width: 20,
-                    ),
-                    Text(
-                      ctrl.expenses[index].title,
-                      style: const TextStyle(fontSize: 20),
+                      width: 3,
                     ),
                     Expanded(
+                      flex: 1,
+                      child: Text(
+                        ctrl.expenses[index].title,
+                        style: const TextStyle(fontSize: 20),
+                      ),
+                    ),
+                    const SizedBox(width: 3,),
+                    Expanded(
+                      flex: 1,
                       child: Align(
                         alignment: Alignment.centerRight,
                         child: Icon(ctrl.getCategoryIcon(ctrl.expenses[index].category), color: Colors.blueAccent,)
                         )
                       ),
+                    const SizedBox(width: 3,),
                     Expanded(
+                      flex: 1,
                       child: Align(
                         alignment: Alignment.centerRight,
                         child: Text(
@@ -136,8 +143,10 @@ class MyExpensesPage extends ViewBase<MyExpensesController> {
                         ),
                       ),
                     ),
+                    const SizedBox(width: 3,),
                     Expanded(
-                        child: Align(
+                      flex: 1,
+                      child: Align(
                       alignment: Alignment.centerRight,
                       child: TextButton(
                         style: Styles.primaryButtonStyle,
@@ -150,8 +159,22 @@ class MyExpensesPage extends ViewBase<MyExpensesController> {
                         },
                       ),
                     )),
+                    const SizedBox(width: 3,),
+                    Expanded(
+                      flex: 1, 
+                      child: TextButton(
+                        onPressed: (){
+                          ctrl.deleteExpense(ctrl.expenses[index]);
+                        },
+                        style: Styles.deleteButtonStyle,
+                        child: const Text(
+                          'Delete',
+                          style: TextStyle(color: Colors.white),
+                        ),
+                      ),
+                    ),
                     const SizedBox(
-                      width: 10,
+                      width: 3,
                     )
                   ],
                 ),

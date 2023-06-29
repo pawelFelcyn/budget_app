@@ -59,4 +59,19 @@ class MyExpensesController extends ControllerBase{
   IconData getCategoryIcon(ExpenseCategory category){
     return _expenseCategoryMapper.toIcon(category);
   }
+
+  void deleteExpense(ExpenseDto expense) async{
+    final confirmation = await showConfirmationDialog('Confirmation', 'Are you sure you want to delete this expense?');
+     if (!confirmation){
+      return;
+     }
+
+     final deletionResult = _service.deleteById(expense.id);
+     if (!deletionResult.isSucces){
+      handleErrorFirebaseResponse(deletionResult);
+      return;
+     }
+
+     expenses.remove(expense);
+  }
 }

@@ -11,9 +11,7 @@ class ExpenseServiceImpl extends ExpenseService{
       FirebaseFirestore.instance.collection('expenses');
 
   @override
-  Future<FirebaseResponse> createExpense(CreateExpenseDto createExpenseDto) async {
-    var expenseDto = ExpenseDto.createdNow(createExpenseDto.title, createExpenseDto.cost, 
-    description: createExpenseDto.description, category: createExpenseDto.category);
+  Future<FirebaseResponse> createExpense(CreateExpenseDto expenseDto) async {
     try {
       User? user = FirebaseAuth.instance.currentUser;
       if (user == null) {
@@ -25,7 +23,7 @@ class ExpenseServiceImpl extends ExpenseService{
         'title': expenseDto.title,
         'cost': expenseDto.cost,
         'description': expenseDto.description,
-        'createdAt': expenseDto.craetedAt,
+        'createdAt': DateTime.now(),
         'category': expenseDto.category.toString().split('.').last
       });
       return FirebaseResponse.succes();
@@ -55,6 +53,7 @@ class ExpenseServiceImpl extends ExpenseService{
       var result = snapshot.docs.map((doc) {
         final expenseData = doc.data() as Map<String, dynamic>;
         return ExpenseDto(
+          id: doc.id,
           title: expenseData['title'],
           cost: expenseData['cost'],
           description: expenseData['description'],
@@ -72,9 +71,21 @@ class ExpenseServiceImpl extends ExpenseService{
   ExpenseCategory _parseCategory(String value){
     return ExpenseCategory.values.firstWhere((element) => element.toString().split('.').last == value);
   }
+
+  @override
+  FirebaseResponse deleteById(String id){
+    try{
+      final DocumentReference documentRef = expensesRef.doc(id);
+      documentRef.delete();
+      return FirebaseResponse.succes();
+    } on Exception catch(e){
+      return FirebaseResponse.withError(e);
+    }
+  }
 }
 
  abstract class ExpenseService{
   Future<FirebaseResponse> createExpense(CreateExpenseDto createExpenseDto);
   Future<FirebaseGetResopnse<List<ExpenseDto>>> getAllExpenses(DateTime from, DateTime to, ExpenseCategory? filterCategory);
+  FirebaseResponse deleteById(String id);
 }
