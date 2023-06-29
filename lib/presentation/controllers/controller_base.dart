@@ -7,6 +7,8 @@ import '../utils/styles.dart';
 import '../views/error_popup.dart';
 
 abstract class ControllerBase extends GetxController{
+  Rx<bool> isBusy = false.obs;
+
   bool validate<T>(T model, Validator<T> validator){
     var validationResult = validator.validate(model);
 

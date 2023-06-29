@@ -14,6 +14,7 @@ class MyIncomsController extends ControllerBase{
   final IncomCategoryMapper _mapper;
   final IncomService _service;
   Rx<bool> firebaseFailed = false.obs;
+  Rx<bool> triedReloadMinimOnce = false.obs;
  
   MyIncomsController(this._service, this._mapper);
 
@@ -22,7 +23,23 @@ class MyIncomsController extends ControllerBase{
   }
 
   void loadIncoms() async{
-     incoms.clear();
+    if (isBusy.value){
+      return;
+    }
+
+    try{
+      isBusy.value = true;
+      await _loadIncomsWithoutBusyCheck();
+    } finally{
+      isBusy.value = false;
+    }
+  }
+  
+  Future _loadIncomsWithoutBusyCheck() async{
+    if (!triedReloadMinimOnce.value){
+      triedReloadMinimOnce.value = true;
+    }
+    incoms.clear();
     var incomsResult = await _service.getAllIncoms(dateFrom, dateTo, filterCategory);
 
     if (!incomsResult.isSucces){
