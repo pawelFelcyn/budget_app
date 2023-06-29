@@ -3,7 +3,6 @@ import 'package:budget_app/domain/mappers/expense_category_mapper.dart';
 import 'package:budget_app/domain/services/expense_service.dart';
 import 'package:budget_app/presentation/controllers/controller_base.dart';
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 
 import '../../data/dtos/expense_category.dart';

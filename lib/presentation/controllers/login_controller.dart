@@ -1,6 +1,5 @@
 import 'package:budget_app/data/dtos/login_dto.dart';
 import 'package:budget_app/domain/services/login_service.dart';
-import 'package:budget_app/domain/validators/login_dto_validator.dart';
 import 'package:budget_app/presentation/controllers/controller_base.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:get/get_navigation/get_navigation.dart';

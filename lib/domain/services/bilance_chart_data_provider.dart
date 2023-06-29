@@ -2,8 +2,6 @@ import 'package:budget_app/data/charts/bilance_chart_data.dart';
 import 'package:budget_app/data/charts/bilance_chart_data_result.dart';
 import 'package:budget_app/data/charts/chart_data.dart';
 import 'package:budget_app/data/charts/groupped_bilance_chart_data.dart';
-import 'package:budget_app/data/dtos/expense.dto.dart';
-import 'package:budget_app/data/dtos/incom_dto.dart';
 import 'package:budget_app/domain/services/expense_service.dart';
 import 'package:budget_app/domain/services/incom_service.dart';
 import 'package:intl/intl.dart';
