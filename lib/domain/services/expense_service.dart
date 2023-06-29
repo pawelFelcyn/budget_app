@@ -39,7 +39,7 @@ class ExpenseServiceImpl extends ExpenseService{
     try {
       User? user = FirebaseAuth.instance.currentUser;
       if (user == null) {
-        throw Exception('User not authenticated.');
+        return FirebaseGetResopnse.withErrorMessage('You are not authenticated');
       }
 
       var query = expensesRef
