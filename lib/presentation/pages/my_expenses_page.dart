@@ -44,7 +44,7 @@ class MyExpensesPage extends ViewBase<MyExpensesController> {
                         onPressed: controller.loadExpenses,
                         style: Styles.primaryButtonStyle,
                         child: GetX<MyExpensesController>(
-                          builder: (ctrl) => getReloadButtonContent(ctrl)
+                          builder: (ctrl) => Styles.reloadButtonContent(ctrl)
                         ),
                       ),
                     ),

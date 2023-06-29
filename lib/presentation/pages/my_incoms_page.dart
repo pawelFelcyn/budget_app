@@ -44,7 +44,7 @@ class MyIncomsPage extends ViewBase<MyIncomsController>{
                         onPressed: controller.loadIncoms,
                         style: Styles.primaryButtonStyle,
                         child: GetX<MyIncomsController>(
-                          builder: (ctrl) => getReloadButtonContent(ctrl)
+                          builder: (ctrl) => Styles.reloadButtonContent(ctrl)
                         ),
                       ),
                     ),
