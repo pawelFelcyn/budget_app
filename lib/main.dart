@@ -12,6 +12,7 @@ import 'package:budget_app/presentation/bindings/login_binding.dart';
 import 'package:budget_app/presentation/bindings/my_expenses_binding.dart';
 import 'package:budget_app/presentation/bindings/my_incoms_binding.dart';
 import 'package:budget_app/presentation/bindings/register_binding.dart';
+import 'package:budget_app/presentation/controllers/bilance_controller.dart';
 import 'package:budget_app/presentation/controllers/pie_chart_view_controller.dart';
 import 'package:budget_app/presentation/pages/analysis_page.dart';
 import 'package:budget_app/presentation/pages/create_expense_page.dart';
@@ -73,6 +74,11 @@ class MyApp extends StatelessWidget {
         Get.find<IncomsChartDataProvider>()
       ),
       tag: 'incomsPieChartViewController'
+    );
+    Get.lazyPut<BilanceController>(
+      () => BilanceController(
+        Get.find()
+      )
     );
 
     return GetMaterialApp(
