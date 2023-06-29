@@ -43,6 +43,7 @@ class RegisterPage extends GetView<RegisterController>{
                     )
                   ),
                 ),
+            Obx(() => controller.getErrorWidget(controller.validationResult.value, "email")),
             const SizedBox(height: 10,),
             TextField(
                   onChanged: (value){
@@ -60,6 +61,7 @@ class RegisterPage extends GetView<RegisterController>{
                     )
                   ),
                 ),
+            Obx(() => controller.getErrorWidget(controller.validationResult.value, "password")),
             const SizedBox(height: 10,),
             Row(
                   children: [

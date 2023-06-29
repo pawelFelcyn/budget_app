@@ -1,4 +1,3 @@
-import 'package:budget_app/domain/services/bilance_chart_data_provider.dart';
 import 'package:budget_app/presentation/controllers/bilance_controller.dart';
 import 'package:budget_app/presentation/controllers/pie_chart_view_controller.dart';
 import 'package:budget_app/presentation/views/bilance_view.dart';

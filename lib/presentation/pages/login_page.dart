@@ -1,5 +1,6 @@
 import 'package:budget_app/presentation/controllers/login_controller.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:get/get_state_manager/src/simple/get_view.dart';
 
 import '../utils/styles.dart';
@@ -33,6 +34,7 @@ class LoginPage extends GetView<LoginController>{
                     )
                   ),
                 ),
+                Obx(() => controller.getErrorWidget(controller.validationResult.value, 'email')),
                 const SizedBox(height: 10,),
                 TextField(
                   onChanged: (value){
@@ -50,6 +52,7 @@ class LoginPage extends GetView<LoginController>{
                     )
                   ),
                 ),
+                Obx(() => controller.getErrorWidget(controller.validationResult.value, 'password')),
                 const SizedBox(height: 10,),
                 Row(
                   children: [
