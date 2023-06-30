@@ -62,7 +62,7 @@ class MyIncomsController extends ControllerBase{
   }
 
   void deleteIncom(IncomDto incom)  async{
-    final confirmation = await showConfirmationDialog('Confirmation', 'Are you sure you want to delete this expense?');
+    final confirmation = await showConfirmationDialog('Confirmation', 'Are you sure you want to delete this incom?');
      if (!confirmation){
       return;
      }
